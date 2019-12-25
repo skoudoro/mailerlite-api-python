@@ -29,6 +29,8 @@ def test_campaign():
     # c = api.campaigns.all()
     # seg, meta = api.segments.all()
     sub = api.subscribers
+    print(sub.search())
+    print(sub.search(search='demo@mailerlite.com'))
     import ipdb; ipdb.set_trace()
 
 

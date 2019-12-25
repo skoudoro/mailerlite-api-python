@@ -60,7 +60,7 @@ class Campaigns:
         url = client.build_url('campaigns', status, **params)
         res_code, res_json = client.get(url, headers=self.headers)
 
-        if as_json:
+        if as_json or not res_json:
             return res_json
 
         for res in res_json:

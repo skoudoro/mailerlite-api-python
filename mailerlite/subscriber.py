@@ -14,6 +14,8 @@ Subscriber = namedtuple('Subscriber', ['id', 'name', 'email', 'sent',
                                        'date_updated', 'opened_rate',
                                        'clicked_rate', 'country_id'
                                        ])
+for nt in [Subscriber, Field]:
+    nt.__new__.__defaults__ = (None,) * len(nt._fields)
 
 
 def get_id_or_email_identifier(**kwargs):
@@ -193,7 +195,7 @@ class Subscribers:
         url = client.build_url('subscribers', **params)
         res_code, res_json = client.get(url, headers=self.headers)
 
-        if as_json:
+        if as_json or not res_json:
             return res_json
 
         for res in res_json:
@@ -233,12 +235,6 @@ class Subscribers:
 
         return Subscriber(**res_json)
 
-    # def update(self):
-    #     pass
-
-    # def create(self):
-    #     pass
-
     def delete(self, id):
         """Remove a subscribers.
 
@@ -254,3 +250,53 @@ class Subscribers:
         """
         url = client.build_url('subscribers', id)
         return client.delete(url, headers=self.headers)
+
+    def search(self, search=None, limit=100, offset=0, minimized=True,
+               as_json=False):
+        """Get paginated details of all Subscribers from your account.
+
+        look at https://developers.mailerlite.com/v2/reference#subscribers
+
+        Parameters
+        ----------
+        search : str
+            query parameter to search
+        limit : int
+            How many subscribers you want
+        offset : int
+            page index
+        minimized : bool
+            return minimized response with: id, email, type
+            default: True
+        as_json : bool
+            return result as json format
+
+        Returns
+        -------
+        subscribers: list
+            all desired Subscribers. More informations :
+            https://developers.mailerlite.com/v2/reference#subscribers
+        """
+        params = {'limit': limit, 'offset': offset, 'minimized': minimized}
+        if search is not None:
+            params.update({'query': search})
+        url = client.build_url('subscribers', 'search', **params)
+
+        res_code, res_json = client.get(url, headers=self.headers)
+
+        if as_json or not res_json:
+            return res_json
+
+        if not minimized:
+            for res in res_json:
+                res['fields'] = [Field(**field) for field in res['fields']]
+
+        all_subscribers = [Subscriber(**res) for res in res_json]
+        return all_subscribers
+
+
+    # def update(self):
+    #     pass
+
+    # def create(self):
+    #     pass

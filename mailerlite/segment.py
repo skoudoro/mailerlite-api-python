@@ -11,6 +11,9 @@ Segment = namedtuple('Segment', ['id', 'title', 'filter', 'total', 'sent',
                                  'opened', 'clicked', 'created_at',
                                  'updated_at', 'timed_out'])
 
+for nt in [Segment, Meta, Pagination]:
+    nt.__new__.__defaults__ = (None,) * len(nt._fields)
+
 
 class Segments:
 
@@ -59,7 +62,7 @@ class Segments:
         url = client.build_url('segments', **params)
         res_code, res_json = client.get(url, headers=self.headers)
 
-        if as_json:
+        if as_json or not res_json:
             return res_json['data'], res_json['meta']
 
         all_segments = [Segment(**res) for res in res_json['data']]
