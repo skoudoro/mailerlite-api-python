@@ -1,12 +1,7 @@
 """Manage Campaign."""
 
-from collections import namedtuple
 import mailerlite.client as client
-
-Stats = namedtuple('Stats', ['count', 'rate'])
-Campaign = namedtuple('Campaign', ['id', 'total_recipients', 'type',
-                                   'date_created', 'date_send', 'name',
-                                   'status', 'opened', 'clicked'])
+from mailerlite.constants import Campaign, Stats
 
 
 class Campaigns:

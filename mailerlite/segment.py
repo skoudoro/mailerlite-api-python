@@ -1,18 +1,7 @@
 """Manage Segments."""
 
-from collections import namedtuple
 import mailerlite.client as client
-
-Pagination = namedtuple('Pagination', ["total", "count", "per_page",
-                                       "current_page", "total_pages",
-                                       "links"])
-Meta = namedtuple('Meta', ['pagination', ])
-Segment = namedtuple('Segment', ['id', 'title', 'filter', 'total', 'sent',
-                                 'opened', 'clicked', 'created_at',
-                                 'updated_at', 'timed_out'])
-
-for nt in [Segment, Meta, Pagination]:
-    nt.__new__.__defaults__ = (None,) * len(nt._fields)
+from mailerlite.constants import Segment, Meta, Pagination
 
 
 class Segments:

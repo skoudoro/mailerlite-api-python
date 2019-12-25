@@ -1,29 +1,7 @@
 """Manage Subcribers."""
 
-from collections import namedtuple
 import mailerlite.client as client
-
-Field = namedtuple('Field', ['key', 'value', 'type'])
-Group = namedtuple('Group', ["id", "name", "total", "active", "unsubscribed",
-                             "bounced", "unconfirmed", "junk", "sent",
-                             "opened", "clicked", "date_created",
-                             "date_updated"])
-Activity = namedtuple('Activity', ['date', 'report_id', 'subject', 'type',
-                                   'link_id', 'link', 'receiver',
-                                   'receiver.name', 'receiver.email',
-                                   'sender', 'sender.name', 'sender.email'])
-Subscriber = namedtuple('Subscriber', ['id', 'name', 'email', 'sent',
-                                       'opened', 'clicked', 'type',
-                                       'signup_ip', 'signup_timestamp',
-                                       'confirmation_ip',
-                                       'confirmation_timestamp',
-                                       'fields', 'date_subscribe',
-                                       'date_unsubscribe', 'date_created',
-                                       'date_updated', 'opened_rate',
-                                       'clicked_rate', 'country_id'
-                                       ])
-for nt in [Subscriber, Field, Group, Activity]:
-    nt.__new__.__defaults__ = (None,) * len(nt._fields)
+from mailerlite.constants import Subscriber, Activity, Group, Field
 
 
 def get_id_or_email_identifier(**kwargs):
@@ -236,7 +214,7 @@ class Subscribers:
         url = client.build_url('subscribers', path)
         res_code, res_json = client.get(url, headers=self.headers)
 
-        if as_json:
+        if as_json or not res_json:
             return res_json
 
         res_json['fields'] = [Field(**res) for res in res_json['fields']]
