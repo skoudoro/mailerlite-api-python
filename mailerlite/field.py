@@ -1,13 +1,13 @@
-"""Manage Groups."""
+"""Manage Fields."""
 
 import mailerlite.client as client
-from mailerlite.constants import Subscriber, Group
+from mailerlite.constants import Field
 
 
-class Groups:
+class Fields:
 
     def __init__(self, headers):
-        """Initialize Groups object.
+        """Initialize Fields object.
 
         Parameters
         ----------
@@ -20,42 +20,34 @@ class Groups:
 
         self.headers = headers
 
-    def all(self, limit=100, offset=0, gfilters='', as_json=False):
-        """Get list of groups from your account.
+    def all(self, as_json=False):
+        """Get list of fields from your account.
 
-        look at https://developers.mailerlite.com/v2/reference#groups
+        https://developers.mailerlite.com/v2/reference#all-fields
 
         Parameters
         ----------
-        limit : int
-            How many groups you want
-        offset : int
-            page index
-        gfilters : str
-            group filters
         as_json : bool
             return result as json format
 
         Returns
         -------
-        groups: list
-            all desired Groups. More informations :
-            https://developers.mailerlite.com/v2/reference#groups
+        fields: list
+            all desired Fields.
         """
-        params = {'limit': limit, 'offset': offset, 'filters': gfilters}
-        url = client.build_url('groups', **params)
+        url = client.build_url('fields')
         res_code, res_json = client.get(url, headers=self.headers)
 
         if as_json or not res_json:
             return res_json
 
-        all_groups = [Group(**res) for res in res_json]
-        return all_groups
+        all_fields = [Fields(**res) for res in res_json]
+        return all_fields
 
     def get(self, id, as_json=False):
-        """Get single group by ID from your account.
+        """Get single field by ID from your account.
 
-        look at https://developers.mailerlite.com/v2/reference#single-group
+        look at https://developers.mailerlite.com/v2/reference#all-fields
 
         Parameters
         ----------
@@ -65,33 +57,33 @@ class Groups:
             return result as json format
         Returns
         -------
-        Group: :class:Group
-            a single group
+        Field: :class:Field
+            a single field
         """
-        url = client.build_url('groups', id)
+        url = client.build_url('fields', id)
         res_code, res_json = client.get(url, headers=self.headers)
 
         if as_json or not res_json:
             return res_json
 
-        return Group(**res_json)
+        return Field(**res_json)
 
     def delete(self, id):
-        """Remove a group.
+        """Remove custom field from account.
 
-        https://developers.mailerlite.com/v2/reference#delete-group
+        https://developers.mailerlite.com/v2/reference#remove-field
 
         Parameters
         ----------
         id : int
-            group id
+            field id
 
         Returns
         -------
         success: bool
             deletion status
         """
-        url = client.build_url('groups', id)
+        url = client.build_url('fields', id)
         return client.delete(url, headers=self.headers)
 
 

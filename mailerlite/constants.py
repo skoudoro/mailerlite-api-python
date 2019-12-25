@@ -6,7 +6,8 @@ MAILERLITE_API_V2_URL = 'https://api.mailerlite.com/api/v2'
 
 VALID_REQUEST_METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE']
 
-Field = namedtuple('Field', ['key', 'value', 'type'])
+Field = namedtuple('Field', ['key', 'value', 'type', 'title', 'id',
+                             'date_updated', 'date_created'])
 Group = namedtuple('Group', ["id", "name", "total", "active", "unsubscribed",
                              "bounced", "unconfirmed", "junk", "sent",
                              "opened", "clicked", "date_created",

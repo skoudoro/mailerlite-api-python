@@ -2,6 +2,7 @@ from mailerlite.campaign import Campaigns
 from mailerlite.segment import Segments
 from mailerlite.subscriber import Subscribers
 from mailerlite.group import Groups
+from mailerlite.field import Fields
 
 
 class MailerLiteApi:
@@ -29,3 +30,4 @@ class MailerLiteApi:
         self.segments = Segments(headers=self.headers)
         self.subscribers = Subscribers(headers=self.headers)
         self.groups = Groups(headers=self.headers)
+        self.fields = Fields(headers=self.headers)
