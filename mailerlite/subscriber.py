@@ -4,6 +4,14 @@ from collections import namedtuple
 import mailerlite.client as client
 
 Field = namedtuple('Field', ['key', 'value', 'type'])
+Group = namedtuple('Group', ["id", "name", "total", "active", "unsubscribed",
+                             "bounced", "unconfirmed", "junk", "sent",
+                             "opened", "clicked", "date_created",
+                             "date_updated"])
+Activity = namedtuple('Activity', ['date', 'report_id', 'subject', 'type',
+                                   'link_id', 'link', 'receiver',
+                                   'receiver.name', 'receiver.email',
+                                   'sender', 'sender.name', 'sender.email'])
 Subscriber = namedtuple('Subscriber', ['id', 'name', 'email', 'sent',
                                        'opened', 'clicked', 'type',
                                        'signup_ip', 'signup_timestamp',
@@ -14,7 +22,7 @@ Subscriber = namedtuple('Subscriber', ['id', 'name', 'email', 'sent',
                                        'date_updated', 'opened_rate',
                                        'clicked_rate', 'country_id'
                                        ])
-for nt in [Subscriber, Field]:
+for nt in [Subscriber, Field, Group, Activity]:
     nt.__new__.__defaults__ = (None,) * len(nt._fields)
 
 
@@ -213,7 +221,7 @@ class Subscribers:
         ----------
         identifier : str
             should be subscriber id or email.
-            e.g: id='1343965485' or email='demo@mailerlite.com'
+            e.g: id=1343965485 or email='demo@mailerlite.com'
         as_json : bool
             return result as json format
         Returns
@@ -294,6 +302,92 @@ class Subscribers:
         all_subscribers = [Subscriber(**res) for res in res_json]
         return all_subscribers
 
+    def groups(self, as_json=False, **identifier):
+        """Get groups subscriber belongs to.
+
+        More informations:
+        https://developers.mailerlite.com/v2/reference#groups-subscriber-belongs-to
+
+        Parameters
+        ----------
+        identifier : str
+            should be subscriber id or email.
+            e.g: id=1343965485 or email='demo@mailerlite.com'
+        as_json : bool
+            return result as json format
+
+        Returns
+        -------
+        groups: list
+            all groups that a subscriber belongs to. More informations :
+            https://developers.mailerlite.com/v2/reference#groups
+        """
+        path = get_id_or_email_identifier(**identifier)
+        if path is None:
+            raise IOError('An identifier must be define')
+
+        url = client.build_url('subscribers', path, 'groups')
+
+        res_code, res_json = client.get(url, headers=self.headers)
+
+        if as_json or not res_json:
+            return res_json
+
+        all_groups = [Group(**res) for res in res_json]
+        return all_groups
+
+    def activity(self, as_json=False, atype=None, **identifier):
+        """Get activities (clicks, opens, etc) of selected subscriber.
+
+        More informations:
+        https://developers.mailerlite.com/v2/reference#activity-of-single-subscriber
+
+        Parameters
+        ----------
+        identifier : str
+            should be subscriber id or email.
+            e.g: id=1343965485 or email='demo@mailerlite.com'
+        as_json : bool
+            return result as json format
+        atype : str
+            Define activity type: Here are the possible values:
+            * None - All activities (default)
+            * opens
+            * clicks
+            * bounces
+            * junks
+            * unsubscribes
+            * forwards
+            * sendings
+
+        Returns
+        -------
+        activities: list
+            all subscriber activities. More informations :
+            https://developers.mailerlite.com/v2/reference#activity-of-single-subscriber
+        """
+        path = get_id_or_email_identifier(**identifier)
+        if path is None:
+            raise IOError('An identifier must be define')
+
+        args = ['subscribers', path, 'activity']
+        if atype:
+            possible_atype = ['opens', 'clicks', 'junks', 'bounces',
+                              'unsubscribes', 'forwards', 'sendings']
+            if atype not in possible_atype:
+                raise ValueError('Incorrect value atype. Activity type should'
+                                 ' be {0}'.format(possible_atype))
+            args.append(atype)
+
+        url = client.build_url(*args)
+
+        res_code, res_json = client.get(url, headers=self.headers)
+
+        if as_json or not res_json:
+            return res_json
+
+        all_activities = [Activity(**res) for res in res_json]
+        return all_activities
 
     # def update(self):
     #     pass
