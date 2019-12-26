@@ -193,7 +193,7 @@ class Subscribers:
     def get(self, as_json=False, **identifier):
         """Get a single subscriber from your account.
 
-        look at https://developers.mailerlite.com/v2/reference#single-subscriber
+        https://developers.mailerlite.com/v2/reference#single-subscriber
 
         Parameters
         ----------
@@ -367,8 +367,96 @@ class Subscribers:
         all_activities = [Activity(**res) for res in res_json]
         return all_activities
 
-    # def update(self):
-    #     pass
+    def update(self, data, as_json=False, **identifier):
+        """Update single subscriber.
 
-    # def create(self):
-    #     pass
+        https://developers.mailerlite.com/v2/reference#update-subscriber
+
+        Parameters
+        ----------
+        data : dict
+            subscriber object. only the email is required.
+            you can use the following example:
+            data = {'name'   : 'John',
+                    'email'  : 'demo@mailerlite.com',
+                    'fields' : {'company': 'MailerLite'}
+                    }
+        as_json : bool
+            return result as json format
+        identifier : str
+            should be subscriber id or email.
+            e.g: id=1343965485 or email='demo@mailerlite.com'
+
+        Returns
+        -------
+        response : int
+            response value
+        content : dict
+            The JSON output from the API
+        """
+        path = get_id_or_email_identifier(**identifier)
+        if path is None:
+            raise IOError('An identifier must be define')
+
+        optional_keys = ['name', 'type', 'fields', 'resend_autoresponders']
+        unknown_keys = [d for d in data.keys() if d not in optional_keys
+                        if d not in ['groups', 'segments']]
+        if unknown_keys:
+            raise ValueError("The following keys are unknown: {}"
+                             .format(unknown_keys))
+
+        url = client.build_url('subscribers', path)
+        res_code, res_json = client.put(url, body=data, headers=self.headers)
+
+        if not res_json:
+            return False
+
+        return Subscriber(**res_json)
+
+    def create(self, data, as_json=False):
+        """Add new single subscriber.
+
+        https://developers.mailerlite.com/v2/reference#create-a-subscriber
+
+        Parameters
+        ----------
+        data : dict
+            subscriber object. only the email is required.
+            you can use the following example:
+            data = {'name'   : 'John',
+                    'email'  : 'demo@mailerlite.com',
+                    'fields' : {'company': 'MailerLite'}
+                    }
+        as_json : bool
+            return result as json format
+        Returns
+        -------
+        subscriber: :class:Subscriber
+            a single subscriber
+        """
+        if not isinstance(data, dict):
+            raise ValueError('In data should be a dictionary.')
+        required_keys = ['email', ]
+        optional_keys = ['name', 'fields', 'resubscribe', 'type',
+                         'signup_ip', 'signup_timestamp', 'confirmation_ip',
+                         'confirmation_timestamp']
+        available_keys = required_keys + optional_keys
+
+        errors = [rk for rk in required_keys if rk not in data.keys()]
+        if errors:
+            raise ValueError("The following keys are missing and they"
+                             " are required : {}".format(errors))
+
+        unknown_keys = [d for d in data.keys() if d not in available_keys
+                        if d not in ['groups', 'segments']]
+        if unknown_keys:
+            raise ValueError("The following keys are unknown: {}"
+                             .format(unknown_keys))
+
+        url = client.build_url('subscribers')
+        res_code, res_json = client.post(url, body=data, headers=self.headers)
+
+        if as_json or not res_json:
+            return res_json
+
+        return Subscriber(**res_json)
