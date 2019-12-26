@@ -221,12 +221,12 @@ class Subscribers:
 
         return Subscriber(**res_json)
 
-    def delete(self, id):
+    def delete(self, subscriber_id):
         """Remove a subscribers.
 
         Parameters
         ----------
-        id : int
+        subscriber_id : int
             subscribers id
 
         Returns
@@ -234,7 +234,7 @@ class Subscribers:
         success: bool
             deletion status
         """
-        url = client.build_url('subscribers', id)
+        url = client.build_url('subscribers', subscriber_id)
         return client.delete(url, headers=self.headers)
 
     def search(self, search=None, limit=100, offset=0, minimized=True,
