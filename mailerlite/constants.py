@@ -14,8 +14,8 @@ Group = namedtuple('Group', ["id", "name", "total", "active", "unsubscribed",
                              "date_updated"])
 Activity = namedtuple('Activity', ['date', 'report_id', 'subject', 'type',
                                    'link_id', 'link', 'receiver',
-                                   'receiver.name', 'receiver.email',
-                                   'sender', 'sender.name', 'sender.email'])
+                                   'receiver_name', 'receiver_email',
+                                   'sender', 'sender_name', 'sender_email'])
 Subscriber = namedtuple('Subscriber', ['id', 'name', 'email', 'sent',
                                        'opened', 'clicked', 'type',
                                        'signup_ip', 'signup_timestamp',
