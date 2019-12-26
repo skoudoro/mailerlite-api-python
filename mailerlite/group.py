@@ -94,9 +94,54 @@ class Groups:
         url = client.build_url('groups', id)
         return client.delete(url, headers=self.headers)
 
+    def update(self, group_id, name, as_json=False):
+        """Update existing group.
 
-    # def update(self):
-    #     pass
+        https://developers.mailerlite.com/v2/reference#rename-group
 
-    # def create(self):
-    #     pass
+        Parameters
+        ----------
+        group_id : int
+            group that you want to rename
+        name : str
+            group name
+        as_json : bool
+            return result as json format
+        Returns
+        -------
+        group: :class:Group
+            group object
+        """
+        url = client.build_url('groups', group_id)
+        body = {"name": name, }
+        res_code, res_json = client.put(url, body=body, headers=self.headers)
+
+        if not res_json:
+            return False
+
+        return Group(**res_json)
+
+    def create(self, name, as_json=False):
+        """Create new group.
+
+        https://developers.mailerlite.com/v2/reference#create-group
+
+        Parameters
+        ----------
+        name : str
+            group name
+        as_json : bool
+            return result as json format
+        Returns
+        -------
+        group: :class:Group
+            group object
+        """
+        url = client.build_url('subscribers')
+        data = {'name': name}
+        res_code, res_json = client.post(url, body=data, headers=self.headers)
+
+        if as_json or not res_json:
+            return res_json
+
+        return Group(**res_json)
