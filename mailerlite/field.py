@@ -68,14 +68,14 @@ class Fields:
 
         return Field(**res_json)
 
-    def delete(self, id):
+    def delete(self, field_id):
         """Remove custom field from account.
 
         https://developers.mailerlite.com/v2/reference#remove-field
 
         Parameters
         ----------
-        id : int
+        field_id : int
             field id
 
         Returns
@@ -83,12 +83,56 @@ class Fields:
         success: bool
             deletion status
         """
-        url = client.build_url('fields', id)
+        url = client.build_url('fields', field_id)
         return client.delete(url, headers=self.headers)
 
+    def update(self, field_id, title, as_json=False):
+        """Update custom field in account.
 
-    # def update(self):
-    #     pass
+        https://developers.mailerlite.com/v2/reference#update-field
 
-    # def create(self):
-    #     pass
+        Parameters
+        ----------
+        field_id : int
+            field id
+        title : str
+            Title of field
+
+        Returns
+        -------
+        field : :class:Field
+            field object updated
+        """
+        url = client.build_url('fields', field_id)
+        body = {"title": title}
+        res_code, res_json = client.put(url, body=body, headers=self.headers)
+
+        if as_json or not res_json:
+            return res_json
+
+        return Field(**res_json)
+
+    def create(self, title, field_type='TEXT'):
+        """Create new custom field in account.
+
+        https://developers.mailerlite.com/v2/reference#create-field
+
+        Parameters
+        ----------
+        title : str
+            Title of field
+        field_type: str
+            Type of field. Available values: TEXT , NUMBER, DATE
+            (default: TEXT)
+
+        Returns
+        -------
+        field : :class:Field
+            field object updated
+        """
+        if field_type.upper() not in ['TEXT', 'NUMBER', 'DATE']:
+            raise ValueError('Incorrect field_type. Available values'
+                             ' are: TEXT , NUMBER, DATE')
+        url = client.build_url('fields')
+        data = {'title': title, 'type': field_type.upper()}
+        return client.post(url, body=data, headers=self.headers)
