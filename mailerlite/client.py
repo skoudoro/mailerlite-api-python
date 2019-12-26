@@ -19,7 +19,6 @@ def build_url(*path, **queryparams):
     url : str
       desired path
     """
-
     url = '/'.join(map(str, path))
     if queryparams:
         url += '?{}'.format(urlencode(queryparams))

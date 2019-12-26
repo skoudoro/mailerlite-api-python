@@ -175,7 +175,6 @@ class Campaigns:
             response value
         content : dict
             The JSON output from the API
-
         """
         if not isinstance(data, dict):
             raise ValueError('In data should be a dictionary.')
