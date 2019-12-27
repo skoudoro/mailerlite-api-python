@@ -3,6 +3,7 @@ from mailerlite.segment import Segments
 from mailerlite.subscriber import Subscribers
 from mailerlite.group import Groups
 from mailerlite.field import Fields
+from mailerlite.webhook import Webhooks
 
 
 class MailerLiteApi:
@@ -31,3 +32,4 @@ class MailerLiteApi:
         self.subscribers = Subscribers(headers=self.headers)
         self.groups = Groups(headers=self.headers)
         self.fields = Fields(headers=self.headers)
+        self.webhooks = Webhooks(headers=self.headers)
