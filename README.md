@@ -207,16 +207,11 @@ api.batch(batch_requests)
 
 We love contributions!
 
-You've discovered a bug or something else you want to change - excellent! Create an issue!
+You've discovered a bug or something else you want to change - excellent! [Create an issue](https://github.com/skoudoro/mailerlite-api-python/issues)!
 
-You've worked out a way to fix it – even better! Submit a Pull Request!
+You've worked out a way to fix it – even better! Submit a [Pull Request](https://github.com/skoudoro/mailerlite-api-python/pulls)!
 
-Start with the contributing guide!
-
-
-# Support
-
-If you are having issues, please [let us know](https://github.com/skoudoro/mailerlite-api-python/issues) or submit a [pull request](https://github.com/skoudoro/mailerlite-api-python/pulls).
+Start with the [contributing guide](https://github.com/skoudoro/mailerlite-api-python/blob/master/CONTRIBUTING.rst)!
 
 # License
 
