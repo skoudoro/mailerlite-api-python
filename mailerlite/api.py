@@ -4,6 +4,7 @@ from mailerlite.subscriber import Subscribers
 from mailerlite.group import Groups
 from mailerlite.field import Fields
 from mailerlite.webhook import Webhooks
+from mailerlite.account import Account
 
 
 class MailerLiteApi:
@@ -23,9 +24,9 @@ class MailerLiteApi:
         if not api_key:
             raise ValueError("Empty API_KEY. Please enter a valid API_KEY")
 
-        self.headers = {'content-type': "application/json",
-                        'x-mailerlite-apikey': api_key
-                        }
+        self._headers = {'content-type': "application/json",
+                         'x-mailerlite-apikey': api_key
+                         }
 
         self.campaigns = Campaigns(headers=self.headers)
         self.segments = Segments(headers=self.headers)
@@ -33,3 +34,8 @@ class MailerLiteApi:
         self.groups = Groups(headers=self.headers)
         self.fields = Fields(headers=self.headers)
         self.webhooks = Webhooks(headers=self.headers)
+        self.account = Account(headers=self.headers)
+
+    @property
+    def headers(self):
+        return self._headers
