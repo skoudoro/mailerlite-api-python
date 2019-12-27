@@ -213,14 +213,14 @@ class Campaigns:
         url = client.build_url('campaigns')
         return client.post(url, body=data, headers=self.headers)
 
-    def delete(self, id):
+    def delete(self, campaign_id):
         """Remove a campaign.
 
         look at https://developers.mailerlite.com/reference#delete-campaign
 
         Parameters
         ----------
-        id : int
+        campaign_id : int
             campaign id
 
         Returns
@@ -228,7 +228,7 @@ class Campaigns:
         success: bool
             deletion status
         """
-        url = client.build_url('campaigns', id)
+        url = client.build_url('campaigns', campaign_id)
         return client.delete(url, headers=self.headers)
 
     def count(self, status='sent'):
