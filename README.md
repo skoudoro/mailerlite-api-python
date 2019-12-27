@@ -1,10 +1,7 @@
 # mailerlite-api-python
 
-.. image:: https://img.shields.io/travis/skoudoro/mailerlite-api-python.svg
-        :target: https://travis-ci.org/skoudoro/mailerlite-api-python
-
-.. image:: https://img.shields.io/pypi/v/mailerlite-api-python.svg
-        :target: https://pypi.python.org/pypi/mailerlite-api-python
+![](https://img.shields.io/travis/skoudoro/mailerlite-api-python.svg?target=https://travis-ci.org/skoudoro/mailerlite-api-python)
+![](https://img.shields.io/pypi/v/mailerlite-api-python.svg?target=https://pypi.python.org/pypi/mailerlite-api-python)
 
 
 Python Wrapper for Mailerlite API v2
@@ -32,19 +29,23 @@ api = MailerLiteApi('YOUR_API_KEY')
 
 ### Campaigns
 
+#### Get all campaigns or a specific one
 ```python
-# Get all campaigns
 all_campaigns = api.campaigns.all()
-# Get active campaigns
-active = api.compaings.all(status='active')
-# Modify a campaign
+draft = api.compaings.all(status='draft')
+```
+#### Modify a campaign
+```python
 one_campaign = all_campaigns[0]
 html = '<h1>Title</h1><p>Content</p><p><small><a href=\"{$unsubscribe}\">Unsubscribe</a></small></p>'
 plain = "Your email client does not support HTML emails. "
 plain += "Open newsletter here: {$url}. If you do not want"
 plain += " to receive emails from us, click here: {$unsubscribe}"
+
 api.campaigns.update(one_campaign.id, html=html, plain=plain)
-# Create a campaign
+```
+#### Create a campaign
+```python
 data = {"subject": "Regular campaign subject",
                    "groups": [2984475, 3237221],
                    "type": "regular"}
