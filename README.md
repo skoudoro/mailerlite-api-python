@@ -191,16 +191,16 @@ Need documentation...
 ### Batch
 
 ```python
-batch_requests = {"requests": [{"method":"GET",
-                                "path": "/api/v2/groups"
-                                },
-                                {"method":"POST",
-                                    "path": "/api/v2/groups",
-                                "body": {"name": "New group"}
-                                }
-                                ]
-                   }
-api.batch(batch_requests)
+>>> batch_requests = {"requests": [{"method":"GET",
+...                                 "path": "/api/v2/groups"
+...                                 },
+...                                 {"method":"POST",
+...                                  "path": "/api/v2/groups",
+...                                  "body": {"name": "New group"}
+...                                 }
+...                                 ]
+...                    }
+>>> api.batch(batch_requests)
 ```
 
 # Contribute
