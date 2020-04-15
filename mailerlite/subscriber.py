@@ -190,6 +190,42 @@ class Subscribers:
         all_subscribers = [Subscriber(**res) for res in res_json]
         return all_subscribers
 
+    def count(self, stype=None, as_json=False):
+        """Get the count of subscribers of a type.
+
+        This is not documented in the API.
+        https://developers.mailerlite.com/reference#subscribers
+
+        Parameters
+        ----------
+        stype : str
+            Define subscriber type: Here are the possible values:
+            * None - All subscribers (default)
+            * active
+            * unsubscribed
+            * bounced
+            * junk
+            * unconfirmed
+        as_json : bool
+            return result as json format
+        Returns
+        -------
+        number: Integer
+            the count of subscribers
+        """
+        params = {}
+        if stype and stype.lower() in ['active', 'unsubscribed', 'bounced',
+                                       'junk', 'unconfirmed']:
+            params.update({'type': stype})
+
+        url = client.build_url('subscribers', 'count', **params)
+        res_code, res_json = client.get(url, headers=self.headers)
+
+        if as_json or not res_json:
+            return res_json
+
+        return res_json['count']
+
     def get(self, as_json=False, **identifier):
         """Get a single subscriber from your account.
 
