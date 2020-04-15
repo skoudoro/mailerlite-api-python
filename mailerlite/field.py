@@ -41,7 +41,7 @@ class Fields:
         if as_json or not res_json:
             return res_json
 
-        all_fields = [Fields(**res) for res in res_json]
+        all_fields = [Field(**res) for res in res_json]
         return all_fields
 
     def get(self, id, as_json=False):
