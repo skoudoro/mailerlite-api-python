@@ -81,25 +81,25 @@ First, Grab YOUR_API_KEY from your Mailerlite account (Profile > Integrations > 
 
 ```python
 >>> api.subscribers.get(email='demo@mailerlite.com')
->>> api.subscriber.get(id=1343965485)
+>>> api.subscribers.get(id=1343965485)
 ```
 
 #### search
 
 ```python
->>> api.subscriber.search(search='demo@mailerlite.com')
+>>> api.subscribers.search(search='demo@mailerlite.com')
 ```
 
 #### subscribers groups
 
 ```python
->>> api.subscriber.groups(id=1343965485)
+>>> api.subscribers.groups(id=1343965485)
 ```
 
 #### subscribers activity
 
 ```python
->>> subscriber.activity(id='1343965485')
+>>> api.subscribers.activity(id='1343965485')
 ```
 
 #### Create subscriber
@@ -109,7 +109,17 @@ First, Grab YOUR_API_KEY from your Mailerlite account (Profile > Integrations > 
             'email': 'demo-678@mailerlite.com',
             'fields': {'company': 'MailerLite'}
             }
->>> api.subscriber.create(data)
+>>> api.subscribers.create(data)
+```
+
+#### Update subscriber
+
+```python
+>>> data = {'name': 'John',
+            'email': 'demo-678@mailerlite.com',
+            'fields': {'company': 'MailerLite'}
+            }
+>>> api.subscribers.update(data, id='1343965485')
 ```
 
 ### Groups
