@@ -411,6 +411,8 @@ class Subscribers:
         if not res_json:
             return False
 
+        res_json['fields'] = [Field(**res) for res in res_json['fields']]
+
         return Subscriber(**res_json)
 
     def create(self, data, as_json=False):
