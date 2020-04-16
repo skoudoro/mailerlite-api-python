@@ -1,4 +1,5 @@
 from mailerlite import MailerLiteApi
+from mailerlite.constants import API_KEY_TEST
 import requests
 
 
@@ -14,7 +15,7 @@ def test_basic_campaign():
 
     headers = {
         'content-type': "application/json",
-        'x-mailerlite-apikey': "fc7b8c5b32067bcd47cafb5f475d2fe9"
+        'x-mailerlite-apikey': API_KEY_TEST
     }
 
     response = requests.request("GET", url, headers=headers)
@@ -23,7 +24,7 @@ def test_basic_campaign():
 
 
 def test_create_campaign():
-    test_key = "fc7b8c5b32067bcd47cafb5f475d2fe9"
+    test_key = API_KEY_TEST
     api = MailerLiteApi(test_key)
     data = {"subject": "Regular campaign subject",
             "groups": [2984475, 3237221],
@@ -45,7 +46,7 @@ def test_create_campaign():
 
 
 def test_update_campaign():
-    test_key = "fc7b8c5b32067bcd47cafb5f475d2fe9"
+    test_key = API_KEY_TEST
     api = MailerLiteApi(test_key)
 
     campaign_id = 3971635
@@ -60,7 +61,7 @@ def test_update_campaign():
 
 def test_campaign():
     # my_key = ""
-    test_key = "fc7b8c5b32067bcd47cafb5f475d2fe9"
+    test_key = API_KEY_TEST
     api = MailerLiteApi(test_key)
 
     _ = api.campaigns.all()
@@ -68,9 +69,3 @@ def test_campaign():
     # sub = api.subscribers
     # print(sub.search())
     # print(sub.search(search='demo@mailerlite.com'))
-
-    import ipdb; ipdb.set_trace()
-
-
-# test_basic_campaign()
-test_campaign()
