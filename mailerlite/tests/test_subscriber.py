@@ -30,4 +30,4 @@ def test_subscriber():
             'fields': {'company': 'MailerLite'}
             }
     res = subscriber.create(data)
-    print(res)
+    # print(res)

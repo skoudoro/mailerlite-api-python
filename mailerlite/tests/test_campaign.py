@@ -20,7 +20,7 @@ def test_basic_campaign():
 
     response = requests.request("GET", url, headers=headers)
 
-    print(response.text)
+    # print(response.text)
 
 
 def test_create_campaign():
@@ -42,7 +42,7 @@ def test_create_campaign():
                }
     res = api.campaigns.create(data)
     res = api.campaigns.create(data_ab)
-    print(res)
+    # print(res)
 
 
 def test_update_campaign():
