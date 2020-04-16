@@ -1,6 +1,6 @@
 # Mailerlite-api-python
 
-![](https://img.shields.io/travis/skoudoro/mailerlite-api-python.svg?target=https://travis-ci.org/skoudoro/mailerlite-api-python)
+![](https://travis-ci.com/skoudoro/mailerlite-api-python.svg?branch=master)
 ![](https://img.shields.io/pypi/v/mailerlite-api-python.svg?target=https://pypi.python.org/pypi/mailerlite-api-python)
 
 
@@ -16,6 +16,13 @@ This client is hosted at PyPi under the name mailerlite-api-python, to install i
 ```
 pip install mailerlite-api-python
 ```
+
+or install dev version:
+
+```
+git clone https://github.com/skoudoro/mailerlite-api-python.git
+pip install -e .
+````
 
 ## Examples
 
