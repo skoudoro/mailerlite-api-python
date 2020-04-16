@@ -14,9 +14,11 @@ class Groups:
         headers : dict
             request header containing your mailerlite api_key.
             More information : https://developers.mailerlite.com/docs/request
+
         """
-        if not headers:
-            raise ValueError("Empty headers. Please enter a valid one")
+        valid_headers, error_msg = client.check_headers(headers)
+        if not valid_headers:
+            raise ValueError(error_msg)
 
         self.headers = headers
 
@@ -41,6 +43,7 @@ class Groups:
         groups: list
             all desired Groups. More informations :
             https://developers.mailerlite.com/v2/reference#groups
+
         """
         params = {'limit': limit, 'offset': offset, 'filters': gfilters}
         url = client.build_url('groups', **params)
@@ -67,6 +70,7 @@ class Groups:
         -------
         Group: :class:Group
             a single group
+
         """
         url = client.build_url('groups', id)
         res_code, res_json = client.get(url, headers=self.headers)
@@ -90,6 +94,7 @@ class Groups:
         -------
         success: bool
             deletion status
+
         """
         url = client.build_url('groups', id)
         return client.delete(url, headers=self.headers)
@@ -107,10 +112,12 @@ class Groups:
             group name
         as_json : bool
             return result as json format
+
         Returns
         -------
         group: :class:Group
             group object
+
         """
         url = client.build_url('groups', group_id)
         body = {"name": name, }
@@ -132,10 +139,12 @@ class Groups:
             group name
         as_json : bool
             return result as json format
+
         Returns
         -------
         group: :class:Group
             group object
+
         """
         url = client.build_url('groups')
         data = {'name': name}
@@ -165,10 +174,12 @@ class Groups:
             autoresponders will be sent if value is true (default False)
         as_json : bool
             return result as json format
+
         Returns
         -------
         group: :class:Group
             group object
+
         """
         url = client.build_url('groups', group_id, 'subscribers', 'import')
 
@@ -218,11 +229,13 @@ class Groups:
             * unconfirmed
         as_json : bool
             return result as json format
+
         Returns
         -------
         subscribers: list
             all desired Subscribers. More informations :
             https://developers.mailerlite.com/v2/reference#subscribers
+
         """
         params = {'limit': limit, 'offset': offset}
         if stype and stype.lower() in ['active', 'unsubscribed', 'bounced',
@@ -254,6 +267,7 @@ class Groups:
             subscriber id
         as_json : bool
             return result as json format
+
         Returns
         -------
         subscriber: :class:Subscriber

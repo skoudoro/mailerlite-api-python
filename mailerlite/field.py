@@ -14,9 +14,11 @@ class Fields:
         headers : dict
             request header containing your mailerlite api_key.
             More information : https://developers.mailerlite.com/docs/request
+
         """
-        if not headers:
-            raise ValueError("Empty headers. Please enter a valid one")
+        valid_headers, error_msg = client.check_headers(headers)
+        if not valid_headers:
+            raise ValueError(error_msg)
 
         self.headers = headers
 
@@ -34,6 +36,7 @@ class Fields:
         -------
         fields: list
             all desired Fields.
+
         """
         url = client.build_url('fields')
         res_code, res_json = client.get(url, headers=self.headers)
@@ -55,10 +58,12 @@ class Fields:
             should be group id. e.g: id=1343965485
         as_json : bool
             return result as json format
+
         Returns
         -------
         Field: :class:Field
             a single field
+
         """
         url = client.build_url('fields', id)
         res_code, res_json = client.get(url, headers=self.headers)
@@ -82,6 +87,7 @@ class Fields:
         -------
         success: bool
             deletion status
+
         """
         url = client.build_url('fields', field_id)
         return client.delete(url, headers=self.headers)
@@ -102,6 +108,7 @@ class Fields:
         -------
         field : :class:Field
             field object updated
+
         """
         url = client.build_url('fields', field_id)
         body = {"title": title}
@@ -129,6 +136,7 @@ class Fields:
         -------
         field : :class:Field
             field object updated
+
         """
         if field_type.upper() not in ['TEXT', 'NUMBER', 'DATE']:
             raise ValueError('Incorrect field_type. Available values'

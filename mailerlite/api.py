@@ -22,8 +22,9 @@ class MailerLiteApi:
         ----------
         api_key : str
             Your mailerlite api_key.
+
         """
-        if not api_key:
+        if not api_key or not isinstance(api_key, str):
             raise ValueError("Empty API_KEY. Please enter a valid API_KEY")
 
         self._headers = {'content-type': "application/json",
@@ -71,6 +72,7 @@ class MailerLiteApi:
         * There is a limit of maximum 50 requests per single batch.
         * The order of response objects are the same as sent requests.
         * requests parameter should not be empty
+
         """
         url = client.build_url('batch')
         return client.post(url, body=batch_requests, headers=self.headers)
