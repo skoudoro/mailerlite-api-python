@@ -64,7 +64,8 @@ class Segments:
     def count(self):
         """Return the number of segments.
 
-        look at https://developers.mailerlite.com/reference#section-segmentscount
+        More informations:
+        https://developers.mailerlite.com/reference#section-segments-count
 
         Returns
         -------
