@@ -4,6 +4,8 @@ from collections import namedtuple
 
 MAILERLITE_API_V2_URL = 'https://api.mailerlite.com/api/v2'
 
+API_KEY_TEST = "fc7b8c5b32067bcd47cafb5f475d2fe9"
+
 VALID_REQUEST_METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE']
 
 Field = namedtuple('Field', ['key', 'value', 'type', 'title', 'id',
@@ -11,7 +13,7 @@ Field = namedtuple('Field', ['key', 'value', 'type', 'title', 'id',
 Group = namedtuple('Group', ["id", "name", "total", "active", "unsubscribed",
                              "bounced", "unconfirmed", "junk", "sent",
                              "opened", "clicked", "date_created",
-                             "date_updated"])
+                             "date_updated", "parent_id"])
 Activity = namedtuple('Activity', ['date', 'report_id', 'subject', 'type',
                                    'campaign_id', 'link_id', 'link',
                                    'receiver', 'receiver_name',
