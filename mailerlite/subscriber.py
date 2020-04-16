@@ -215,7 +215,7 @@ class Subscribers:
         number: Integer
             the count of subscribers
         """
-        warn("Please, be aware that `count` is not documented in the official API")
+        warn("Please, be aware that `count` is not in the official API")
 
         params = {}
         if stype and stype.lower() in ['active', 'unsubscribed', 'bounced',
