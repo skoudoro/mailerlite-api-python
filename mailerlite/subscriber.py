@@ -1,5 +1,6 @@
 """Manage Subcribers."""
 
+from warnings import warn
 import mailerlite.client as client
 from mailerlite.constants import Subscriber, Activity, Group, Field
 
@@ -193,7 +194,7 @@ class Subscribers:
     def count(self, stype=None, as_json=False):
         """Get the count of subscribers of a type.
 
-        This is not documented in the API.
+        Please, be aware that `count` is not documented in the official API
         https://developers.mailerlite.com/reference#subscribers
 
         Parameters
@@ -208,11 +209,14 @@ class Subscribers:
             * unconfirmed
         as_json : bool
             return result as json format
+
         Returns
         -------
         number: Integer
             the count of subscribers
         """
+        warn("Please, be aware that `count` is not documented in the official API")
+
         params = {}
         if stype and stype.lower() in ['active', 'unsubscribed', 'bounced',
                                        'junk', 'unconfirmed']:

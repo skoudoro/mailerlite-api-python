@@ -122,6 +122,16 @@ First, Grab YOUR_API_KEY from your Mailerlite account (Profile > Integrations > 
 >>> api.subscribers.update(data, id='1343965485')
 ```
 
+#### Count subscribers
+
+Get the total count of all subscribers in a single call.
+
+Please, be aware that is not documented in the official API.
+
+```python
+>>> api.subscribers.count()
+```
+
 ### Groups
 
 Need documentation...
