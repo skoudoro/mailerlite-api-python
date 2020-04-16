@@ -14,9 +14,11 @@ class Segments:
         headers : dict
             request header containing your mailerlite api_key.
             More information : https://developers.mailerlite.com/docs/request
+
         """
-        if not headers:
-            raise ValueError("Empty headers. Please enter a valid one")
+        valid_headers, error_msg = client.check_headers(headers)
+        if not valid_headers:
+            raise ValueError(error_msg)
 
         self.headers = headers
 
@@ -43,6 +45,7 @@ class Segments:
             https://developers.mailerlite.com/v2/reference#segments-1
         meta: object
             some meta informations about the segments
+
         """
         if order.upper() not in ['ASC', 'DESC']:
             raise IOError("Incorrect order, please choose between ASC or DESC")
@@ -71,6 +74,7 @@ class Segments:
         -------
         count: int
             number of segments
+
         """
         url = client.build_url('segments', 'count')
         res_code, res_json = client.get(url, headers=self.headers)

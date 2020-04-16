@@ -13,9 +13,11 @@ class Account:
         headers : dict
             request header containing your mailerlite api_key.
             More information : https://developers.mailerlite.com/docs/request
+
         """
-        if not headers:
-            raise ValueError("Empty headers. Please enter a valid one")
+        valid_headers, error_msg = client.check_headers(headers)
+        if not valid_headers:
+            raise ValueError(error_msg)
 
         self.headers = headers
 
@@ -28,6 +30,7 @@ class Account:
         -------
         info: dict
             all account information.
+
         """
         url = client.build_url('me')
         res_code, res_json = client.get(url, headers=self.headers)
@@ -44,6 +47,7 @@ class Account:
         -------
         stats: dict
             account stats
+
         """
         url = client.build_url('stats')
         res_code, res_json = client.get(url, headers=self.headers)
@@ -60,6 +64,7 @@ class Account:
         -------
         success: bool
             deletion status
+
         """
         url = client.build_url('settings', 'double_optin')
         res_code, res_json = client.get(url, headers=self.headers)
@@ -79,6 +84,7 @@ class Account:
         -------
         status : dict
             action result
+
         """
         url = client.build_url('settings', 'double_optin')
         body = {'enable': enable}

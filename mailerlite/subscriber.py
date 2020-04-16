@@ -24,9 +24,11 @@ class Subscribers:
         headers : dict
             request header containing your mailerlite api_key.
             More information : https://developers.mailerlite.com/docs/request
+
         """
-        if not headers:
-            raise ValueError("Empty headers. Please enter a valid one")
+        valid_headers, error_msg = client.check_headers(headers)
+        if not valid_headers:
+            raise ValueError(error_msg)
 
         self.headers = headers
 
