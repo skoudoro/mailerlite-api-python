@@ -118,7 +118,8 @@ class Campaigns:
         ---------
         >>> from mailerlite import MailerLiteApi
         >>> api = MailerLiteApi('my_keys')
-        >>> html = '<h1>Title</h1><p>Content</p><p><small><a href=\"{$unsubscribe}\">Unsubscribe</a></small></p>'
+        >>> html = '<h1>Title</h1><p>Content</p><p><small>'
+        >>> html += '<a href=\"{$unsubscribe}\">Unsubscribe</a></small></p>'
         >>> plain = "Your email client does not support HTML emails. "
         >>> plain += "Open newsletter here: {$url}. If you do not want"
         >>> plain += " to receive emails from us, click here: {$unsubscribe}"

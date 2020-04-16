@@ -11,8 +11,7 @@ import mailerlite.client as client
 
 
 class MailerLiteApi:
-    """
-    Python interface to the mailerlite v2 API.
+    """Python interface to the mailerlite v2 API.
 
     """
 

@@ -1,10 +1,11 @@
 from mailerlite.subscriber import Subscribers
+from mailerlite.constants import API_KEY_TEST
 
 
 def test_subscriber():
     headers = {
         'content-type': "application/json",
-        'x-mailerlite-apikey': "fc7b8c5b32067bcd47cafb5f475d2fe9"
+        'x-mailerlite-apikey': API_KEY_TEST
     }
 
     subscriber = Subscribers(headers)
@@ -29,7 +30,4 @@ def test_subscriber():
             'fields': {'company': 'MailerLite'}
             }
     res = subscriber.create(data)
-    print(res)
-
-
-test_subscriber()
+    # print(res)
