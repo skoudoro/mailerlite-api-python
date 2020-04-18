@@ -10,6 +10,9 @@ def test_groups_instance():
         'x-mailerlite-apikey': API_KEY_TEST
     }
 
+    with pytest.raises(ValueError):
+        Groups(API_KEY_TEST)
+
     groups = Groups(headers)
     res_json = groups.all(as_json=True)
 

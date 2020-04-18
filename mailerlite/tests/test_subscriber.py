@@ -12,6 +12,9 @@ def test_subscriber():
         'x-mailerlite-apikey': API_KEY_TEST
     }
 
+    with pytest.raises(ValueError):
+        Subscribers(API_KEY_TEST)
+
     subscriber = Subscribers(headers)
 
     num = randint(0, 1000)
@@ -49,11 +52,9 @@ def test_subscriber():
     assert e_res.name != res.name
     assert res.name == 'Jack'
 
-    res = subscriber.all()
+    res = subscriber.active()
     assert len(res) > 0
 
-    # res = subscriber.active()
-    # print(res)
     # res = subscriber.groups(id='1343965485')
     # print(res)
     # res = subscriber.activity(id='1343965485')
