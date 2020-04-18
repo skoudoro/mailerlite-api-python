@@ -123,7 +123,6 @@ First, Grab YOUR_API_KEY from your Mailerlite account (Profile > Integrations > 
 
 ```python
 >>> data = {'name': 'John',
-            'email': 'demo-678@mailerlite.com',
             'fields': {'company': 'MailerLite'}
             }
 >>> api.subscribers.update(data, id='1343965485')
