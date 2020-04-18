@@ -420,7 +420,6 @@ class Subscribers:
             subscriber object. only the email is required.
             you can use the following example:
             data = {'name'   : 'John',
-                    'email'  : 'demo@mailerlite.com',
                     'fields' : {'company': 'MailerLite'}
                     }
         as_json : bool
@@ -435,10 +434,22 @@ class Subscribers:
             response value
         content : dict
             The JSON output from the API
+
+        Notes
+        -----
+        The email of a subscriber can not be updated
+
         """
         path = get_id_or_email_identifier(**identifier)
         if path is None:
             raise IOError('An identifier must be define')
+
+        if 'email' in data.keys():
+            raise ValueError("Subscriber email can not be updated. Please, "
+                             "remove this field or create a new Subscriber. "
+                             "For more informations, look at "
+                             "http://help.mailerlite.com/article/show"
+                             "/29233-how-to-edit-a-subscribers-data")
 
         optional_keys = ['name', 'type', 'fields', 'resend_autoresponders']
         unknown_keys = [d for d in data.keys() if d not in optional_keys
