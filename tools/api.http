@@ -1,0 +1,5 @@
+GET https://api.mailerlite.com/api/v2/subscribers
+Content-Type: application/json
+X-MailerLite-ApiKey: fc7b8c5b32067bcd47cafb5f475d2fe9
+
+###
