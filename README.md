@@ -11,7 +11,7 @@ Python Wrapper for Mailerlite API v2
 
 ## Installation
 
-This client is hosted at [PyPi](https://pypi.org/project/mailerlite-api-python/) under the name mailerlite-api-python, to install it, simply run
+This client is hosted at [PyPi](https://pypi.org/project/mailerlite-api-python/) under the name **mailerlite-api-python**, to install it, simply run
 
 ```
 pip install mailerlite-api-python
