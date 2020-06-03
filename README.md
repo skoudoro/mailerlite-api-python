@@ -57,7 +57,7 @@ First, Grab YOUR_API_KEY from your Mailerlite account (Profile > Integrations > 
 >>> api.campaigns.update(one_campaign.id, html=html, plain=plain)
 ```
 
-#### Create /Delete a campaign
+#### Create / Delete a campaign
 
 ```python
 >>> data = {"subject": "Regular campaign subject",
@@ -150,7 +150,7 @@ Need documentation...
 >>> api.segments.all()
 ```
 
-##### Get countof  Segments.
+##### Get count of Segments.
 
 ```python
 >>> api.segments.count()
@@ -170,7 +170,7 @@ Need documentation...
 >>> api.fields.get(field_id=123456)
 ```
 
-##### Create/update/delete one Field
+##### Create / update / delete one Field
 
 ```python
 >>> api.fields.create(title="my custom title")
