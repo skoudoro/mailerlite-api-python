@@ -24,6 +24,10 @@ git clone https://github.com/skoudoro/mailerlite-api-python.git
 pip install -e .
 ````
 
+## Method reference
+
+For complete reference, visit the [official MailerLite API reference](https://developers.mailerlite.com/reference).
+
 ## Examples
 
 ### Initialization
@@ -227,6 +231,20 @@ Need documentation...
 ...                                 ]
 ...                    }
 >>> api.batch(batch_requests)
+```
+
+# Tests
+
+- Step 1: Install pytest:
+
+```
+  $ pip install pytest
+```
+
+- Step 2: Run the tests:
+
+```
+  $ pytest -svv mailerlite
 ```
 
 # Contribute
