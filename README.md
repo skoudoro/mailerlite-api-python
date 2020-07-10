@@ -1,5 +1,7 @@
 # Mailerlite-api-python
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/9c17e95d29cd489ba86411db969a576e)](https://app.codacy.com/manual/skab12/mailerlite-api-python?utm_source=github.com&utm_medium=referral&utm_content=skoudoro/mailerlite-api-python&utm_campaign=Badge_Grade_Dashboard)
+
 ![](https://travis-ci.com/skoudoro/mailerlite-api-python.svg?branch=master)
 ![](https://img.shields.io/pypi/v/mailerlite-api-python.svg?target=https://pypi.python.org/pypi/mailerlite-api-python)
 
