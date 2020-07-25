@@ -146,7 +146,60 @@ Please, be aware that is not documented in the official API.
 
 ### Groups
 
-Need documentation...
+#### Get all Groups
+
+```python
+>>> api.groups.all()
+>>> api.groups.all(limit=50)
+>>> api.groups.all(ofset=10)
+>>> api.groups.all(gfilters='My Group')
+>>> api.groups.all(group_id=12345)
+```
+
+#### Rename a Group
+
+```python
+>>> api.groups.create(group_id=12345, name='My New Group')
+```
+
+#### Rename a Group
+
+```python
+>>> api.groups.update(id=12345, name='New Name')
+```
+
+#### Get a Group
+
+```python
+>>> api.groups.get(id=12345)
+```
+
+#### Delete a Group
+
+```python
+>>> api.groups.delete()
+>>> api.groups.delete(id=12345)
+```
+
+#### Get all subscribers in a Group
+
+```python
+>>> api.groups.subscribers(group_id=12345)
+>>> api.groups.subscribers(group_id=12345, limit=50, ofset=1)
+>>> api.groups.subscribers(group_id=12345, stype='active')
+```
+
+#### Get one subscriber from a Group
+
+```python
+>>> api.groups.subscriber(group_id=12345, subscriber_id=54321)
+```
+
+#### Delete one subscriber from a Group
+
+```python
+>>> api.groups.delete_subscriber(group_id=12345, subscriber_id=54321)
+```
 
 ### Segments
 
