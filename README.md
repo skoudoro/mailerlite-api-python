@@ -148,7 +148,7 @@ Please, be aware that is not documented in the official API.
 ```python
 >>> api.groups.all()
 >>> api.groups.all(limit=50)
->>> api.groups.all(ofset=10)
+>>> api.groups.all(offset=10)
 >>> api.groups.all(gfilters='My Group')
 >>> api.groups.all(group_id=12345)
 ```
@@ -182,7 +182,7 @@ Please, be aware that is not documented in the official API.
 
 ```python
 >>> api.groups.subscribers(group_id=12345)
->>> api.groups.subscribers(group_id=12345, limit=50, ofset=1)
+>>> api.groups.subscribers(group_id=12345, limit=50, offset=1)
 >>> api.groups.subscribers(group_id=12345, stype='active')
 ```
 
