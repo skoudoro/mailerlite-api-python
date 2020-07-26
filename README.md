@@ -2,26 +2,24 @@
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/9c17e95d29cd489ba86411db969a576e)](https://app.codacy.com/manual/skab12/mailerlite-api-python?utm_source=github.com&utm_medium=referral&utm_content=skoudoro/mailerlite-api-python&utm_campaign=Badge_Grade_Dashboard)
 
-![](https://travis-ci.com/skoudoro/mailerlite-api-python.svg?branch=master)
-![](https://img.shields.io/pypi/v/mailerlite-api-python.svg?target=https://pypi.python.org/pypi/mailerlite-api-python)
-
+![Build Status](https://travis-ci.com/skoudoro/mailerlite-api-python.svg?branch=master)
+![PyPi Latest Version](https://img.shields.io/pypi/v/mailerlite-api-python.svg?target=https://pypi.python.org/pypi/mailerlite-api-python)
 
 Python Wrapper for Mailerlite API v2
 
+## Getting Started
 
-# Getting Started
-
-## Installation
+### Installation
 
 This client is hosted at [PyPi](https://pypi.org/project/mailerlite-api-python/) under the name **mailerlite-api-python**, to install it, simply run
 
-```
+```terminal
 pip install mailerlite-api-python
 ```
 
 or install dev version:
 
-```
+```terminal
 git clone https://github.com/skoudoro/mailerlite-api-python.git
 pip install -e .
 ````
@@ -38,7 +36,6 @@ First, Grab YOUR_API_KEY from your Mailerlite account (Profile > Integrations > 
 
 ```python
 >>> from mailerlite import MailerLiteApi
-
 >>> api = MailerLiteApi('YOUR_API_KEY')
 ```
 
@@ -156,7 +153,7 @@ Please, be aware that is not documented in the official API.
 >>> api.groups.all(group_id=12345)
 ```
 
-#### Rename a Group
+#### Create a Group
 
 ```python
 >>> api.groups.create(group_id=12345, name='My New Group')
@@ -203,13 +200,13 @@ Please, be aware that is not documented in the official API.
 
 ### Segments
 
-##### Get list of Segments.
+#### Get list of Segments
 
 ```python
 >>> api.segments.all()
 ```
 
-##### Get count of Segments.
+#### Get count of Segments
 
 ```python
 >>> api.segments.count()
@@ -217,19 +214,19 @@ Please, be aware that is not documented in the official API.
 
 ### Fields
 
-##### Get list of Fields.
+#### Get list of Fields
 
 ```python
 >>> api.fields.all()
 ```
 
-##### Get one Field
+#### Get one Field
 
 ```python
 >>> api.fields.get(field_id=123456)
 ```
 
-##### Create / update / delete one Field
+#### Create / update / delete one Field
 
 ```python
 >>> api.fields.create(title="my custom title")
@@ -239,26 +236,26 @@ Please, be aware that is not documented in the official API.
 
 ### Webhooks
 
-##### Get list of Webhooks.
+#### Get list of Webhooks
 
 ```python
 >>> api.webhooks.all()
 ```
 
-##### Get one webhook
+#### Get one webhook
 
 ```python
 >>> api.webhooks.get(webhook_id=123456)
 ```
 
-##### Create/update/delete one webhook
+#### Create/update/delete one webhook
 
 ```python
 >>> api.webhooks.create(url="https://yoursite/script-is-here",
-... 	                event="subscriber.create")
+...                     event="subscriber.create")
 >>> api.webhooks.update(webhook_id=123456,
 ...                     url="https://yoursite/script-is-here",
-...	                event="subscriber.create")
+...                     event="subscriber.create")
 >>> api.webhooks.delete(webhook_id=123456)
 ```
 
@@ -288,21 +285,21 @@ Please, be aware that is not documented in the official API.
 >>> api.batch(batch_requests)
 ```
 
-# Tests
+## Tests
 
 - Step 1: Install pytest:
 
-```
-  $ pip install pytest
+```terminal
+  pip install pytest
 ```
 
 - Step 2: Run the tests:
 
-```
-  $ pytest -svv mailerlite
+```terminal
+  pytest -svv mailerlite
 ```
 
-# Contribute
+## Contribute
 
 We love contributions!
 
@@ -312,7 +309,6 @@ You've worked out a way to fix it – even better! Submit a [Pull Request](https
 
 Start with the [contributing guide](https://github.com/skoudoro/mailerlite-api-python/blob/master/CONTRIBUTING.rst)!
 
-# License
+## License
 
 Project under 3-clause BSD license, more informations [here](https://github.com/skoudoro/mailerlite-api-python/blob/master/LICENSE)
-
