@@ -2,7 +2,7 @@
 
 from collections import namedtuple
 
-MAILERLITE_API_V2_URL = 'https://api.mailerlite.com/api/v2'
+MAILERLITE_API_V2_URL = 'https://api.mailerlite.com/api/v2/'
 
 API_KEY_TEST = "fc7b8c5b32067bcd47cafb5f475d2fe9"
 

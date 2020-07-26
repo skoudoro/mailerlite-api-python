@@ -1,8 +1,7 @@
 """Utility function for calling the API."""
 
-from os.path import join as pjoin
 import requests
-from urllib.parse import urlencode
+from urllib.parse import urlencode, urljoin
 from mailerlite.constants import MAILERLITE_API_V2_URL, VALID_REQUEST_METHODS
 
 
@@ -90,7 +89,7 @@ def make_request(url, method, headers=None, data=None,
         raise ValueError("Incorrect request method. method should be "
                          "{}".format(VALID_REQUEST_METHODS))
 
-    url = pjoin(MAILERLITE_API_V2_URL, url)
+    url = urljoin(MAILERLITE_API_V2_URL, url)
     hooks = hooks or requests.hooks.default_hooks()
     headers = headers or requests.utils.default_headers()
     try:
