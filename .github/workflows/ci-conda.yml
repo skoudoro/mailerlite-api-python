@@ -20,22 +20,22 @@ jobs:
 
     steps:
     - name: Checkout
-        uses: actions/checkout@v2
+      uses: actions/checkout@v2
     - name: Cache conda
-        uses: actions/cache@v2
-        with:
-          path: ~/conda_pkgs_dir
-          key: conda-${{ matrix.os }}-python-${{ matrix.python-version }}-${{ hashFiles('environment-ci.yml') }}
-      - name: Setup Miniconda
-        uses: goanpeca/setup-miniconda@v1
-        with:
-          auto-update-conda: true
-          auto-activate-base: false
-          activate-environment: mailerlite-ci
-          python-version: ${{ matrix.python-version }}
-          channels: defaults,conda-forge
-          environment-file: environment-ci.yml
-          use-only-tar-bz2: true
+      uses: actions/cache@v2
+      with:
+        path: ~/conda_pkgs_dir
+        key: conda-${{ matrix.os }}-python-${{ matrix.python-version }}-${{ hashFiles('environment-ci.yml') }}
+    - name: Setup Miniconda
+      uses: goanpeca/setup-miniconda@v1
+      with:
+        auto-update-conda: true
+        auto-activate-base: false
+        activate-environment: mailerlite-ci
+        python-version: ${{ matrix.python-version }}
+        channels: defaults,conda-forge
+        environment-file: environment-ci.yml
+        use-only-tar-bz2: true
     - name: Install dependencies
       run: |
         conda install --yes flake8 pytest
