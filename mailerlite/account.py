@@ -33,13 +33,14 @@ class Account:
 
         """
         url = client.build_url('me')
-        res_code, res_json = client.get(url, headers=self.headers)
+        _, res_json = client.get(url, headers=self.headers)
 
         return res_json
 
     def stats(self):
-        """Get basic stats for of account, such as subscribers,
-        open/click rates and so on.
+        """Get basic stats for of account.
+
+        e.g. subscribers, open/click rates and so on.
 
         https://developers.mailerlite.com/v2/reference#stats
 
@@ -50,13 +51,12 @@ class Account:
 
         """
         url = client.build_url('stats')
-        res_code, res_json = client.get(url, headers=self.headers)
+        _, res_json = client.get(url, headers=self.headers)
 
         return res_json
 
     def double_optin(self):
-        """Retrieve the status if double opt-in for API and
-        integrations is enabled
+        """Retrieve the status double opt-in.
 
         https://developers.mailerlite.com/v2/reference#get-double-optin-status
 
@@ -67,7 +67,7 @@ class Account:
 
         """
         url = client.build_url('settings', 'double_optin')
-        res_code, res_json = client.get(url, headers=self.headers)
+        _, res_json = client.get(url, headers=self.headers)
         return res_json
 
     def set_double_optin(self, enable):
@@ -88,6 +88,6 @@ class Account:
         """
         url = client.build_url('settings', 'double_optin')
         body = {'enable': enable}
-        res_code, res_json = client.post(url, body=body, headers=self.headers)
+        _, res_json = client.post(url, body=body, headers=self.headers)
 
         return res_json

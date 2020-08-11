@@ -54,7 +54,7 @@ class Campaigns:
 
         params = {'limit': limit, 'offset': offset, 'order': order}
         url = client.build_url('campaigns', status, **params)
-        res_code, res_json = client.get(url, headers=self.headers)
+        _, res_json = client.get(url, headers=self.headers)
 
         if as_json or not res_json:
             return res_json
@@ -95,7 +95,7 @@ class Campaigns:
     #     return Campaign(**res_json)
 
     def update(self, campaign_id, html, plain, auto_inline=True):
-        """Upload your HTML template to created campaign.
+        r"""Upload your HTML template to created campaign.
 
         https://developers.mailerlite.com/v2/reference#put-custom-content-to-campaign
 
@@ -139,7 +139,7 @@ class Campaigns:
         url = client.build_url('campaigns', campaign_id, 'content')
         # Todo, Check html syntax
         body = {"html": html, "plain": plain}
-        res_code, res_json = client.put(url, body=body, headers=self.headers)
+        _, res_json = client.put(url, body=body, headers=self.headers)
 
         if not res_json:
             return False
@@ -249,5 +249,5 @@ class Campaigns:
         if status.lower() not in ['sent', 'draft', 'outbox']:
             raise ValueError('Incorrect status, check documentation')
         url = client.build_url('campaigns', status.lower(), 'count')
-        res_code, res_json = client.get(url, headers=self.headers)
+        _, res_json = client.get(url, headers=self.headers)
         return res_json['count']

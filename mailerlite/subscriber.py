@@ -182,7 +182,7 @@ class Subscribers:
             params.update({'type': stype})
 
         url = client.build_url('subscribers', **params)
-        res_code, res_json = client.get(url, headers=self.headers)
+        _, res_json = client.get(url, headers=self.headers)
 
         if as_json or not res_json:
             return res_json
@@ -225,7 +225,7 @@ class Subscribers:
             params.update({'type': stype})
 
         url = client.build_url('subscribers', 'count', **params)
-        res_code, res_json = client.get(url, headers=self.headers)
+        _, res_json = client.get(url, headers=self.headers)
 
         if as_json or not res_json:
             return res_json
@@ -254,7 +254,7 @@ class Subscribers:
             raise IOError('An identifier must be define')
 
         url = client.build_url('subscribers', path)
-        res_code, res_json = client.get(url, headers=self.headers)
+        _, res_json = client.get(url, headers=self.headers)
 
         if as_json or not res_json:
             return res_json
@@ -310,7 +310,7 @@ class Subscribers:
             params.update({'query': search})
         url = client.build_url('subscribers', 'search', **params)
 
-        res_code, res_json = client.get(url, headers=self.headers)
+        _, res_json = client.get(url, headers=self.headers)
 
         if as_json or not res_json:
             return res_json
@@ -348,7 +348,7 @@ class Subscribers:
 
         url = client.build_url('subscribers', path, 'groups')
 
-        res_code, res_json = client.get(url, headers=self.headers)
+        _, res_json = client.get(url, headers=self.headers)
 
         if as_json or not res_json:
             return res_json
@@ -401,7 +401,7 @@ class Subscribers:
 
         url = client.build_url(*args)
 
-        res_code, res_json = client.get(url, headers=self.headers)
+        _, res_json = client.get(url, headers=self.headers)
 
         if as_json or not res_json:
             return res_json
@@ -459,10 +459,10 @@ class Subscribers:
                              .format(unknown_keys))
 
         url = client.build_url('subscribers', path)
-        res_code, res_json = client.put(url, body=data, headers=self.headers)
+        _, res_json = client.put(url, body=data, headers=self.headers)
 
-        if not res_json:
-            return False
+        if as_json or not res_json:
+            return res_json
 
         res_json['fields'] = [Field(**res) for res in res_json['fields']]
 
@@ -509,7 +509,7 @@ class Subscribers:
                              .format(unknown_keys))
 
         url = client.build_url('subscribers')
-        res_code, res_json = client.post(url, body=data, headers=self.headers)
+        _, res_json = client.post(url, body=data, headers=self.headers)
 
         if as_json or not res_json:
             return res_json
