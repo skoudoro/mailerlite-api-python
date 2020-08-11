@@ -36,6 +36,7 @@ jobs:
         channels: defaults,conda-forge
         use-only-tar-bz2: true
     - name: Install dependencies
+      shell: pwsh
       run: |
         conda install --yes -n mailerlite-ci flake8 pytest
         conda install --yes -n mailerlite-ci --file=requirements.txt --file=requirements-dev.txt
