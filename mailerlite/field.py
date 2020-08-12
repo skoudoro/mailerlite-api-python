@@ -39,7 +39,7 @@ class Fields:
 
         """
         url = client.build_url('fields')
-        res_code, res_json = client.get(url, headers=self.headers)
+        _, res_json = client.get(url, headers=self.headers)
 
         if as_json or not res_json:
             return res_json
@@ -66,7 +66,7 @@ class Fields:
 
         """
         url = client.build_url('fields', id)
-        res_code, res_json = client.get(url, headers=self.headers)
+        _, res_json = client.get(url, headers=self.headers)
 
         if as_json or not res_json:
             return res_json
@@ -112,7 +112,7 @@ class Fields:
         """
         url = client.build_url('fields', field_id)
         body = {"title": title}
-        res_code, res_json = client.put(url, body=body, headers=self.headers)
+        _, res_json = client.put(url, body=body, headers=self.headers)
 
         if as_json or not res_json:
             return res_json

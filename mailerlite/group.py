@@ -47,7 +47,7 @@ class Groups:
         """
         params = {'limit': limit, 'offset': offset, 'filters': gfilters}
         url = client.build_url('groups', **params)
-        res_code, res_json = client.get(url, headers=self.headers)
+        _, res_json = client.get(url, headers=self.headers)
 
         if as_json or not res_json:
             return res_json
@@ -55,14 +55,14 @@ class Groups:
         all_groups = [Group(**res) for res in res_json]
         return all_groups
 
-    def get(self, id, as_json=False):
+    def get(self, group_id, as_json=False):
         """Get single group by ID from your account.
 
         look at https://developers.mailerlite.com/v2/reference#single-group
 
         Parameters
         ----------
-        id : int
+        group_id : int
             should be group id. e.g: id=1343965485
         as_json : bool
             return result as json format
@@ -72,22 +72,22 @@ class Groups:
             a single group
 
         """
-        url = client.build_url('groups', id)
-        res_code, res_json = client.get(url, headers=self.headers)
+        url = client.build_url('groups', group_id)
+        _, res_json = client.get(url, headers=self.headers)
 
         if as_json or not res_json:
             return res_json
 
         return Group(**res_json)
 
-    def delete(self, id):
+    def delete(self, group_id):
         """Remove a group.
 
         https://developers.mailerlite.com/v2/reference#delete-group
 
         Parameters
         ----------
-        id : int
+        group_id : int
             group id
 
         Returns
@@ -96,7 +96,7 @@ class Groups:
             deletion status
 
         """
-        url = client.build_url('groups', id)
+        url = client.build_url('groups', group_id)
         return client.delete(url, headers=self.headers)
 
     def update(self, group_id, name, as_json=False):
@@ -121,7 +121,7 @@ class Groups:
         """
         url = client.build_url('groups', group_id)
         body = {"name": name, }
-        res_code, res_json = client.put(url, body=body, headers=self.headers)
+        _, res_json = client.put(url, body=body, headers=self.headers)
 
         if not res_json:
             return False
@@ -148,7 +148,7 @@ class Groups:
         """
         url = client.build_url('groups')
         data = {'name': name}
-        res_code, res_json = client.post(url, body=data, headers=self.headers)
+        _, res_json = client.post(url, body=data, headers=self.headers)
 
         if as_json or not res_json:
             return res_json
@@ -198,7 +198,7 @@ class Groups:
         if errors:
             raise ValueError('All subscribers_data should contain the'
                              ' following keys: email, name')
-        res_code, res_json = client.post(url, body=body, headers=self.headers)
+        _, res_json = client.post(url, body=body, headers=self.headers)
 
         if as_json or not res_json:
             return res_json
@@ -243,7 +243,7 @@ class Groups:
             params.update({'type': stype})
 
         url = client.build_url('groups', group_id, 'subscribers', **params)
-        res_code, res_json = client.get(url, headers=self.headers)
+        _, res_json = client.get(url, headers=self.headers)
 
         if as_json or not res_json:
             return res_json
@@ -275,7 +275,7 @@ class Groups:
         """
         url = client.build_url('groups', group_id, 'subscribers',
                                subscriber_id)
-        res_code, res_json = client.get(url, headers=self.headers)
+        _, res_json = client.get(url, headers=self.headers)
 
         if as_json or not res_json:
             return res_json

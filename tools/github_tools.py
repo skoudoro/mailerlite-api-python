@@ -113,13 +113,13 @@ def fetch_basic_stats(project="skoudoro/mailerlite-api-python"):
     -------
     basic_stats : dict
         A dictionary containing basic statistics. For example:
-        {   'subscribers': 41,
-            'forks': 142,
-            'forks_url': 'https://github.com/skoudoro/mailerlite-api-python/network'
-            'watchers': 94,
-            'open_issues': 154,
-            'stars': 94,
-            'stars_url': 'https://github.com/skoudoro/mailerlite-api-python/stargazers'
+        {'subscribers': 41,
+         'forks': 142,
+         'forks_url': 'https://github.com/skoudoro/mailerlite-api-python/network'
+         'watchers': 94,
+         'open_issues': 154,
+         'stars': 94,
+         'stars_url': 'https://github.com/skoudoro/mailerlite-api-python/stargazers'
         }
 
     """
@@ -423,10 +423,9 @@ def github_stats(**kwargs):
 
     print("fetching GitHub stats since %s (tag: %s)" % (since, tag),
           file=sys.stderr)
-    # turn off to play interactively without redownloading, use %run -i
-    if 1:
-        issues = issues_closed_since(since, pulls=False)
-        pulls = issues_closed_since(since, pulls=True)
+
+    issues = issues_closed_since(since, pulls=False)
+    pulls = issues_closed_since(since, pulls=True)
 
     # For regular reports, it's nice to show them in reverse chronological
     # order

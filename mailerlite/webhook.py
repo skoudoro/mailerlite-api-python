@@ -30,7 +30,7 @@ class Webhooks:
             all webhooks.
         """
         url = client.build_url('webhooks')
-        res_code, res_json = client.get(url, headers=self.headers)
+        _, res_json = client.get(url, headers=self.headers)
 
         return res_json
 
@@ -50,7 +50,7 @@ class Webhooks:
             the desired webhook.
         """
         url = client.build_url('webhooks', webhook_id)
-        res_code, res_json = client.get(url, headers=self.headers)
+        _, res_json = client.get(url, headers=self.headers)
 
         return res_json
 
@@ -93,7 +93,7 @@ class Webhooks:
         """
         url = client.build_url('webhooks', webhook_id)
         body = {"url": url, 'event': event}
-        res_code, res_json = client.put(url, body=body, headers=self.headers)
+        _, res_json = client.put(url, body=body, headers=self.headers)
 
         return res_json
 
@@ -116,6 +116,6 @@ class Webhooks:
         """
         url = client.build_url('webhooks')
         body = {"url": url, 'event': event}
-        res_code, res_json = client.post(url, body=body, headers=self.headers)
+        _, res_json = client.post(url, body=body, headers=self.headers)
 
         return res_json
