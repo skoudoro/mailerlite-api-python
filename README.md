@@ -2,7 +2,7 @@
 
 Python Wrapper for Mailerlite API v2
 
-<table align="left">
+<table align="center">
     <tr>
       <td align="center"><b>Deployment</b></td>
       <td align="center"><a href="https://pypi.org/project/mailerlite-api-python/"><img src="https://img.shields.io/pypi/v/mailerlite-api-python.svg?logo=python&logoColor=white" alt="pypi mailerlite"></a></td>
