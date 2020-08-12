@@ -1,11 +1,32 @@
 # Mailerlite-api-python
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/9c17e95d29cd489ba86411db969a576e)](https://app.codacy.com/manual/skab12/mailerlite-api-python?utm_source=github.com&utm_medium=referral&utm_content=skoudoro/mailerlite-api-python&utm_campaign=Badge_Grade_Dashboard)
-
-![Build Status](https://travis-ci.com/skoudoro/mailerlite-api-python.svg?branch=master)
-![PyPi Latest Version](https://img.shields.io/pypi/v/mailerlite-api-python.svg?target=https://pypi.python.org/pypi/mailerlite-api-python)
-
 Python Wrapper for Mailerlite API v2
+
+<table align="left">
+    <tr>
+      <td align="center"><b>Deployment</b></td>
+      <td align="center"><a href="https://pypi.org/project/mailerlite-api-python/"><img src="https://img.shields.io/pypi/v/mailerlite-api-python.svg?logo=python&logoColor=white" alt="pypi mailerlite"></a></td>
+    </tr>
+    <tr>
+      <td align="center"><b>Build Status</b></td>
+      <td align="center"><a href="https://travis-ci.com/github/skoudoro/mailerlite-api-python"><img src="https://travis-ci.com/skoudoro/mailerlite-api-python.svg?branch=master"></a> <a href="https://github.com/skoudoro/mailerlite-api-python/actions?query=workflow%3A%22CI+%28PIP%29%22"><img src="https://github.com/skoudoro/mailerlite-api-python/workflows/CI%20(PIP)/badge.svg"></a> <a href="https://github.com/skoudoro/mailerlite-api-python/actions?query=workflow%3A%22CI+%28CONDA%29%22"><img src="https://github.com/skoudoro/mailerlite-api-python/workflows/CI%20(CONDA)/badge.svg"></a></td>
+    </tr>
+    <tr>
+      <td align="center"><b>Metrics</b></td>
+      <td align="center">
+        <a href="https://app.codacy.com/manual/skab12/mailerlite-api-python?utm_source=github.com&utm_medium=referral&utm_content=skoudoro/mailerlite-api-python&utm_campaign=Badge_Grade_Dashboard
+"><img src="https://api.codacy.com/project/badge/Grade/9c17e95d29cd489ba86411db969a576e" alt="codacy mailerlite python"></a> <a href="https://codecov.io/gh/skoudoro/mailerlite-api-python"><img src="https://codecov.io/gh/skoudoro/mailerlite-api-python/branch/master/graph/badge.svg" alt="codecov mailerlite python"></a>
+      </td>
+    </tr>
+    <tr>
+      <td align="center"><b>License</b></td>
+      <td align="center"><a href="https://opensource.org/licenses/BSD-3-Clause"><img src="https://img.shields.io/badge/License-BSD%203--Clause-blue.svg" alt="bsd"></a></td>
+    </tr>
+    <tr>
+      <td align="center"><b>Community</b></td>
+      <td align="center"><a href="https://github.com/skoudoro/mailerlite-api-python/graphs/contributors"><img src="https://img.shields.io/github/contributors/skoudoro/mailerlite-api-python.svg"></a> <a href="https://github.com/skoudoro/mailerlite-api-python/blob/master/CONTRIBUTING.rst"><img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat"></a> <a href="https://github.com/skoudoro/mailerlite-api-python/blob/master/CONTRIBUTING.rst"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square"></a></td>
+    </tr>
+</table>
 
 ## Getting Started
 
@@ -162,20 +183,20 @@ Please, be aware that is not documented in the official API.
 #### Rename a Group
 
 ```python
->>> api.groups.update(id=12345, name='New Name')
+>>> api.groups.update(group_id=12345, name='New Name')
 ```
 
 #### Get a Group
 
 ```python
->>> api.groups.get(id=12345)
+>>> api.groups.get(group_id=12345)
 ```
 
 #### Delete a Group
 
 ```python
 >>> api.groups.delete()
->>> api.groups.delete(id=12345)
+>>> api.groups.delete(group_id=12345)
 ```
 
 #### Get all subscribers in a Group
