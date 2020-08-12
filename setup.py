@@ -40,6 +40,7 @@ setup(
     description="Python Wrapper for Mailerlite API",
     long_description=readme,
     long_description_content_type='text/markdown',
+    keywords="mailerlite-SDK mailerlite python wrapper",
     author="skoudoro",
     author_email='skab12@gmail.com',
     url='https://github.com/skoudoro/mailerlite-api-python',
@@ -61,7 +62,7 @@ setup(
     install_requires=requirements,
     license="BSD (3-clause)",
     classifiers=[
-        'Development Status :: 2 - Pre-Alpha',
+        'Development Status :: 4 - Beta',
         'Natural Language :: English',
         'Programming Language :: Python :: 3',
     ],
