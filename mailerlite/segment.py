@@ -52,7 +52,7 @@ class Segments:
 
         params = {'limit': limit, 'offset': offset, 'order': order}
         url = client.build_url('segments', **params)
-        res_code, res_json = client.get(url, headers=self.headers)
+        _, res_json = client.get(url, headers=self.headers)
 
         if as_json or not res_json:
             return res_json['data'], res_json['meta']
@@ -77,5 +77,5 @@ class Segments:
 
         """
         url = client.build_url('segments', 'count')
-        res_code, res_json = client.get(url, headers=self.headers)
+        _, res_json = client.get(url, headers=self.headers)
         return res_json['count']

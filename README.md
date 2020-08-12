@@ -308,13 +308,13 @@ Please, be aware that is not documented in the official API.
 
 ## Tests
 
-- Step 1: Install pytest:
+* Step 1: Install pytest
 
 ```terminal
   pip install pytest
 ```
 
-- Step 2: Run the tests:
+* Step 2: Run the tests
 
 ```terminal
   pytest -svv mailerlite

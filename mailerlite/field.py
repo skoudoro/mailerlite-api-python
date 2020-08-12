@@ -47,14 +47,14 @@ class Fields:
         all_fields = [Field(**res) for res in res_json]
         return all_fields
 
-    def get(self, id, as_json=False):
+    def get(self, field_id, as_json=False):
         """Get single field by ID from your account.
 
         look at https://developers.mailerlite.com/v2/reference#all-fields
 
         Parameters
         ----------
-        id : int
+        field_id : int
             should be group id. e.g: id=1343965485
         as_json : bool
             return result as json format
@@ -65,7 +65,7 @@ class Fields:
             a single field
 
         """
-        url = client.build_url('fields', id)
+        url = client.build_url('fields', field_id)
         _, res_json = client.get(url, headers=self.headers)
 
         if as_json or not res_json:

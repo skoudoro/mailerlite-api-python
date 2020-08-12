@@ -123,8 +123,8 @@ class Groups:
         body = {"name": name, }
         _, res_json = client.put(url, body=body, headers=self.headers)
 
-        if not res_json:
-            return False
+        if as_json or not res_json:
+            return as_json
 
         return Group(**res_json)
 
