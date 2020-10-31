@@ -1,7 +1,10 @@
+from mailerlite.campaign import Campaigns
 from mailerlite import MailerLiteApi
 from mailerlite.constants import API_KEY_TEST
 import requests
 
+
+CAMPAIN_ID = None
 
 def test_basic_campaign():
     url = "https://api.mailerlite.com/api/v2/subscribers"
@@ -24,6 +27,7 @@ def test_basic_campaign():
 
 
 def test_create_campaign():
+    global CAMPAIN_ID
     test_key = API_KEY_TEST
     api = MailerLiteApi(test_key)
     data = {"subject": "Regular campaign subject",
@@ -40,24 +44,25 @@ def test_create_campaign():
                                "split_part": "10"
                                }
                }
-    res = api.campaigns.create(data)
-    res = api.campaigns.create(data_ab)
-    # print(res)
+    code, res = api.campaigns.create(data)
+    CAMPAIN_ID = res['id']
+    assert code == 200
+    code, res = api.campaigns.create(data_ab)
+    assert code == 200
+    assert isinstance(res, dict)
 
 
 def test_update_campaign():
+    global CAMPAIN_ID
     test_key = API_KEY_TEST
     api = MailerLiteApi(test_key)
-
-    campaign_id = 3971635
 
     html = '<h1>Title</h1><p>Content</p><p><small>'
     html += '<a href=\"{$unsubscribe}\">Unsubscribe</a></small></p>'
     plain = "Your email client does not support HTML emails. "
     plain += "Open newsletter here: {$url}. If you do not want"
     plain += " to receive emails from us, click here: {$unsubscribe}"
-    res = api.campaigns.update(campaign_id, html=html, plain=plain)
-    # print(res)
+    res = api.campaigns.update(CAMPAIN_ID, html=html, plain=plain)
 
 
 def test_campaign():
