@@ -62,9 +62,9 @@ def test_update_campaign():
     plain = "Your email client does not support HTML emails. "
     plain += "Open newsletter here: {$url}. If you do not want"
     plain += " to receive emails from us, click here: {$unsubscribe}"
-    code, res = api.campaigns.update(CAMPAIN_ID, html=html, plain=plain)
-    assert code == 200
-    assert isinstance(res, dict)
+    updated = api.campaigns.update(CAMPAIN_ID, html=html, plain=plain)
+    assert updated
+    assert isinstance(updated, bool)
 
 
 def test_campaign():
