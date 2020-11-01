@@ -1,4 +1,5 @@
 """Module to tests groups."""
+
 from mailerlite.group import Groups
 from mailerlite.constants import API_KEY_TEST, Group
 import pytest

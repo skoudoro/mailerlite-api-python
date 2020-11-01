@@ -64,14 +64,17 @@ class Fields:
         Field: :class:Field
             a single field
 
+        Notes
+        -----
+        The endpoint GET /fields/id do not exist, so we trick it.
+
         """
-        url = client.build_url('fields', field_id)
-        _, res_json = client.get(url, headers=self.headers)
+        all_fields = self.all()
+        desired_field = [field for field in all_fields
+                         if field.id == field_id]
+        desired_field = desired_field[0] if desired_field else None
 
-        if as_json or not res_json:
-            return res_json
-
-        return Field(**res_json)
+        return desired_field
 
     def delete(self, field_id):
         """Remove custom field from account.
