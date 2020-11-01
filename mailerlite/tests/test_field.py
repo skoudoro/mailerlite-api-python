@@ -1,4 +1,6 @@
 """Module to tests Field."""
+import random
+import string
 
 import pytest
 
@@ -12,6 +14,13 @@ def header():
                'x-mailerlite-apikey': API_KEY_TEST
                }
     return headers
+
+
+def generate_random_string(length, seed=1234567):
+    random.seed(seed)
+    letters = string.ascii_uppercase
+    result_str = ''.join(random.choice(letters) for i in range(length))
+    return result_str
 
 
 def test_wrong_headers():
@@ -65,12 +74,14 @@ def test_fields_crud(header):
     for f in current_field._fields:
         assert current_field._asdict().get(f) == last_field._asdict().get(f)
 
-    code, custom_fields = fields.create('TEST_FIELD_PYTHON', 'TEXT')
+    field_name = "TEST_"
+    field_name += generate_random_string(random.randint(5, 15))
+    code, custom_fields = fields.create(field_name, 'TEXT')
     assert code in [200, 201]
 
     custom_fields = Field(**custom_fields)
-    assert custom_fields.title == 'TEST_FIELD_PYTHON'
-    assert custom_fields.key == 'test_field_python'
+    assert custom_fields.title == field_name
+    assert custom_fields.key == field_name.lower()
     assert custom_fields.type == 'TEXT'
 
     updated = fields.update(custom_fields.id, "TEST_MAILERLITE_PYTHON")
