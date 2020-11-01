@@ -1,9 +1,10 @@
 """Module to test subscriber class."""
-import pytest
 from random import randint
 
-from mailerlite.subscriber import Subscribers
+import pytest
+
 from mailerlite.constants import API_KEY_TEST
+from mailerlite.subscriber import Subscribers
 
 
 def test_subscriber():
