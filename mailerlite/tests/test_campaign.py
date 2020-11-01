@@ -1,38 +1,30 @@
+"""Module to tests Campaign."""
+
+import pytest
+
 from mailerlite.campaign import Campaigns
-from mailerlite import MailerLiteApi
 from mailerlite.constants import API_KEY_TEST
-import requests
 
 
-CAMPAIN_ID = None
-
-def test_basic_campaign():
-    url = "https://api.mailerlite.com/api/v2/subscribers"
-
-    data = {'name': 'John',
-            'email': 'demo@mailerlite.com',
-            'fields': {'company': 'MailerLite'}
-            }
-
-    # payload = json.dumps(data)
-
-    headers = {
-        'content-type': "application/json",
-        'x-mailerlite-apikey': API_KEY_TEST
-    }
-
-    response = requests.request("GET", url, headers=headers)
-
-    # print(response.text)
+@pytest.fixture
+def header():
+    headers = {'content-type': "application/json",
+               'x-mailerlite-apikey': API_KEY_TEST
+               }
+    return headers
 
 
-def test_create_campaign():
-    global CAMPAIN_ID
-    test_key = API_KEY_TEST
-    api = MailerLiteApi(test_key)
+@pytest.fixture
+def campaign_data():
     data = {"subject": "Regular campaign subject",
             "groups": [2984475, 3237221],
-            "type": "regular"}
+            "type": "regular"
+            }
+    return data
+
+
+@pytest.fixture
+def campaign_data_ab():
     data_ab = {"groups": [2984475, 3237221],
                "type": "ab",
                "ab_settings": {"send_type": "subject",
@@ -44,36 +36,66 @@ def test_create_campaign():
                                "split_part": "10"
                                }
                }
-    code, res = api.campaigns.create(data)
-    CAMPAIN_ID = res['id']
+    return data_ab
+
+
+def test_wrong_headers(campaign_data):
+    headers_1 = {'content-type': "app",
+                 'x-mailerlite-apikey': API_KEY_TEST
+                 }
+    headers_2 = {'content-type': "application/json",
+                 'x-mailerlite-apikey': 'FAKE_KEY'
+                 }
+    headers_3 = {'content-type': "application/json",
+                 }
+    headers_4 = {'x-mailerlite-apikey': 'FAKE_KEY'
+                 }
+
+    with pytest.raises(OSError):
+        campaign = Campaigns(headers_1)
+        campaign.create(campaign_data)
+
+    with pytest.raises(OSError):
+        campaign = Campaigns(headers_2)
+        campaign.create(campaign_data)
+
+    with pytest.raises(ValueError):
+        campaign = Campaigns(headers_3)
+
+    with pytest.raises(ValueError):
+        campaign = Campaigns(headers_4)
+
+
+def test_campaign_error(header):
+    campaign = Campaigns(header)
+
+    with pytest.raises(ValueError):
+        campaign.count(status='inbox')
+
+
+def test_crud_campaign(header, campaign_data, campaign_data_ab):
+    campaign_obj = Campaigns(header)
+
+    code, res = campaign_obj.create(campaign_data)
     assert code == 200
-    code, res = api.campaigns.create(data_ab)
+
+    code, res = campaign_obj.create(campaign_data_ab)
     assert code == 200
     assert isinstance(res, dict)
-
-
-def test_update_campaign():
-    global CAMPAIN_ID
-    test_key = API_KEY_TEST
-    api = MailerLiteApi(test_key)
 
     html = '<h1>Title</h1><p>Content</p><p><small>'
     html += '<a href=\"{$unsubscribe}\">Unsubscribe</a></small></p>'
     plain = "Your email client does not support HTML emails. "
     plain += "Open newsletter here: {$url}. If you do not want"
     plain += " to receive emails from us, click here: {$unsubscribe}"
-    updated = api.campaigns.update(CAMPAIN_ID, html=html, plain=plain)
+
+    updated = campaign_obj.update(res['id'], html=html, plain=plain)
     assert updated
     assert isinstance(updated, bool)
 
+    code, res = campaign_obj.delete(res['id'])
+    assert code == 200
+    assert res['success']
 
-def test_campaign():
-    # my_key = ""
-    test_key = API_KEY_TEST
-    api = MailerLiteApi(test_key)
-
-    _ = api.campaigns.all()
-    # seg, meta = api.segments.all()
-    # sub = api.subscribers
-    # print(sub.search())
-    # print(sub.search(search='demo@mailerlite.com'))
+    nb_draft = campaign_obj.count('draft')
+    assert nb_draft > 0
