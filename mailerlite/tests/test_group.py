@@ -1,20 +1,24 @@
 """Module to tests groups."""
 
-from mailerlite.group import Groups
-from mailerlite.constants import API_KEY_TEST, Group
 import pytest
 
+from mailerlite.constants import API_KEY_TEST, Group
+from mailerlite.group import Groups
 
-def test_groups_instance():
-    headers = {
-        'content-type': "application/json",
-        'x-mailerlite-apikey': API_KEY_TEST
-    }
 
+@pytest.fixture
+def header():
+    headers = {'content-type': "application/json",
+               'x-mailerlite-apikey': API_KEY_TEST
+               }
+    return headers
+
+
+def test_groups_instance(header):
     with pytest.raises(ValueError):
         Groups(API_KEY_TEST)
 
-    groups = Groups(headers)
+    groups = Groups(header)
     res_json = groups.all(as_json=True)
 
     # TEST to check if there is new key in the API
@@ -36,13 +40,8 @@ def test_groups_instance():
         assert isinstance(g, Group)
 
 
-def test_groups_crud():
-    headers = {
-        'content-type': "application/json",
-        'x-mailerlite-apikey': API_KEY_TEST
-    }
-
-    groups = Groups(headers)
+def test_groups_crud(header):
+    groups = Groups(header)
 
     expected_group_name = "TEST_K_GROUP"
     expected_group_name_2 = "TEST_GROUP_KKK"
@@ -63,4 +62,7 @@ def test_groups_crud():
 
 
 def test_groups_subscriber():
+    # groups = Groups(header)
+
+    # subs = groups.subscriber
     pass

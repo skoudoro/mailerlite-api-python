@@ -61,7 +61,7 @@ def test_subscribers_crud(header):
     subscriber = Subscribers(header)
 
     num = randint(1000, 100000)
-    mail = 'demo-test-{}@mailerlite.com'.format(num)
+    mail = 'demo-test-python-{}@mailerlite.com'.format(num)
     data = {'name': 'John',
             'email': mail,
             'fields': {'company': 'MailerLite'}
