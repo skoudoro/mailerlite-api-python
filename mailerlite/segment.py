@@ -78,4 +78,5 @@ class Segments:
         """
         url = client.build_url('segments', 'count')
         _, res_json = client.get(url, headers=self.headers)
-        return res_json['count']
+
+        return res_json.get('count') or len(res_json.get('data'))
