@@ -104,6 +104,7 @@ def make_request(url, method, headers=None, data=None,
         raise e
     else:
         if response.status_code >= 400:
+            print(response.json())
             raise IOError(response)
 
         if response.status_code == 204:
