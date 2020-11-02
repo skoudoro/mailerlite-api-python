@@ -1,6 +1,7 @@
 """Module to test subscriber class."""
 import random
 import string
+import time
 
 import pytest
 
@@ -69,14 +70,20 @@ def test_subscribers_error(header):
 def test_subscribers_crud(header):
     subscriber = Subscribers(header)
 
-    num = random.randint(1000, 100000)
-    mail = generate_random_email(length=15, seed=num)
-    data = {'name': 'John',
-            'email': mail,
-            'fields': {'company': 'MailerLite'}
-            }
+    while True:
+        try:
+            num = random.randint(1000, 100000)
+            mail = generate_random_email(length=15, seed=num)
+            data = {'name': 'John',
+                    'email': mail,
+                    'fields': {'company': 'MailerLite'}
+                    }
+            e_res = subscriber.create(data)
+        except OSError:
+            time.sleep(3)
+        else:
+            break
 
-    e_res = subscriber.create(data)
     res = subscriber.get(email=mail)
     assert e_res.email == res.email
 
