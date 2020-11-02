@@ -63,7 +63,6 @@ class Segments:
         meta = Meta(**res_json['meta'])
         return all_segments, meta
 
-    @property
     def count(self):
         """Return the number of segments.
 

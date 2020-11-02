@@ -24,7 +24,7 @@ def test_wrong_headers():
 
     with pytest.raises(OSError):
         segm = Segments(headers_2)
-        segm.count
+        segm.count()
 
     with pytest.raises(ValueError):
         segm = Segments(headers_3)
@@ -38,4 +38,4 @@ def test_segments_crud(header):
     all_segm, meta = segm.all()
 
     assert len(all_segm) == meta.pagination.count
-    assert len(all_segm) == segm.count
+    assert len(all_segm) == segm.count()
