@@ -1,5 +1,6 @@
 """Module to test subscriber class."""
-from random import randint
+import random
+import string
 
 import pytest
 
@@ -13,6 +14,14 @@ def header():
                'x-mailerlite-apikey': API_KEY_TEST
                }
     return headers
+
+
+def generate_random_email(length, seed=1234567):
+    random.seed(seed)
+    letters = string.ascii_lowercase
+    result_str = ''.join(random.choice(letters) for i in range(length))
+    mail = 'demo-test-{}-{}@mailerlite.com'.format(result_str, seed)
+    return mail
 
 
 def test_wrong_headers():
@@ -60,8 +69,8 @@ def test_subscribers_error(header):
 def test_subscribers_crud(header):
     subscriber = Subscribers(header)
 
-    num = randint(1000, 100000)
-    mail = 'demo-test-python-{}@mailerlite.com'.format(num)
+    num = random.randint(1000, 100000)
+    mail = generate_random_email(length=15, seed=num)
     data = {'name': 'John',
             'email': mail,
             'fields': {'company': 'MailerLite'}
