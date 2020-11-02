@@ -33,9 +33,21 @@ def test_wrong_headers():
         segm = Segments(headers_4)
 
 
+def test_segments_error(header):
+    segm = Segments(header)
+
+    with pytest.raises(OSError):
+        segm.all(order='upper')
+
+
 def test_segments_crud(header):
     segm = Segments(header)
     all_segm, meta = segm.all()
 
     assert len(all_segm) == meta.pagination.count
     assert len(all_segm) == segm.count()
+
+    all_segm, meta = segm.all(as_json=True)
+
+    assert len(all_segm)
+    assert 'pagination' in meta.keys()

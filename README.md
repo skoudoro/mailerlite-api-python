@@ -106,6 +106,10 @@ First, Grab YOUR_API_KEY from your Mailerlite account (Profile > Integrations > 
 >>> api.subscribers.all()
 >>> api.subscribers.all(stype='active')
 >>> api.subscribers.active()
+>>> api.subscribers.unsubscribed()
+>>> api.subscribers.bounced()
+>>> api.subscribers.junk()
+>>> api.subscribers.unconfirmed()
 ```
 
 #### Get one subscriber
