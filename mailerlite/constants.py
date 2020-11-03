@@ -40,7 +40,9 @@ Stats = namedtuple('Stats', ['count', 'rate'])
 Campaign = namedtuple('Campaign', ['id', 'total_recipients', 'type',
                                    'date_created', 'date_send', 'name',
                                    'status', 'opened', 'clicked'])
+Webhook = namedtuple('Webhook', ['id', 'event', 'url', 'created_at',
+                                 'updated_at'])
 
 for nt in [Subscriber, Field, Group, Activity, Segment, Meta, Pagination,
-           Campaign, Stats]:
+           Campaign, Stats, Webhook]:
     nt.__new__.__defaults__ = (None,) * len(nt._fields)

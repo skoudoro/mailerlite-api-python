@@ -1,6 +1,7 @@
 """Manage Webhooks."""
 
 import mailerlite.client as client
+from mailerlite.constants import Webhook
 
 
 class Webhooks:
@@ -14,12 +15,13 @@ class Webhooks:
             request header containing your mailerlite api_key.
             More information : https://developers.mailerlite.com/docs/request
         """
-        if not headers:
-            raise ValueError("Empty headers. Please enter a valid one")
+        valid_headers, error_msg = client.check_headers(headers)
+        if not valid_headers:
+            raise ValueError(error_msg)
 
         self.headers = headers
 
-    def all(self):
+    def all(self, as_json=False):
         """Get list of Webhooks.
 
         https://developers.mailerlite.com/v2/reference#get-webhooks-list
@@ -28,13 +30,20 @@ class Webhooks:
         -------
         webhooks: list of dict
             all webhooks.
+        as_json : bool
+            return result as json format
+
         """
         url = client.build_url('webhooks')
         _, res_json = client.get(url, headers=self.headers)
 
-        return res_json
+        if as_json or not res_json:
+            return res_json
 
-    def get(self, webhook_id):
+        all_webhooks = [Webhook(**res) for res in res_json.get('webhooks')]
+        return all_webhooks
+
+    def get(self, webhook_id, as_json=False):
         """Get single field by ID from your account.
 
         https://developers.mailerlite.com/v2/reference#get-single-webhook
@@ -43,16 +52,23 @@ class Webhooks:
         ----------
         webhook_id : int
             ID of a webhook
+        as_json : bool
+            return result as json format
 
         Returns
         -------
         webhook: dict
             the desired webhook.
+
         """
         url = client.build_url('webhooks', webhook_id)
         _, res_json = client.get(url, headers=self.headers)
 
-        return res_json
+        if as_json or not res_json:
+            return res_json
+
+        webhook = Webhook(**res_json)
+        return webhook
 
     def delete(self, webhook_id):
         """Remove a webhook.
@@ -88,8 +104,8 @@ class Webhooks:
 
         Returns
         -------
-        field : :class:Field
-            field object updated
+        webhook : :class:Webhook
+            webhook object updated
         """
         url = client.build_url('webhooks', webhook_id)
         body = {"url": url, 'event': event}
@@ -116,6 +132,19 @@ class Webhooks:
         """
         url = client.build_url('webhooks')
         body = {"url": url, 'event': event}
-        _, res_json = client.post(url, body=body, headers=self.headers)
+        code, res_json = client.post(url, body=body, headers=self.headers)
 
-        return res_json
+        webhook = Webhook(**res_json)
+        return code, webhook
+
+    def count(self):
+        """Return the number of webhooks.
+
+        Returns
+        -------
+        count: int
+            number of webhooks
+
+        """
+        res_json = self.all(as_json=True)
+        return res_json.get('count') or len(res_json.get('webhooks'))
