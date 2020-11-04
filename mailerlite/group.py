@@ -185,7 +185,7 @@ class Groups:
 
         body = {'resubscribe': resubscribe, 'autoresponders': autoresponders}
         if isinstance(subscribers_data, dict):
-            body['subscribers'] = list(subscribers_data)
+            body['subscribers'] = [subscribers_data, ]
         elif isinstance(subscribers_data, list):
             body['subscribers'] = subscribers_data
         else:
@@ -203,7 +203,7 @@ class Groups:
         if as_json or not res_json:
             return res_json
 
-        return Subscriber(**res_json)
+        return [Subscriber(**subs) for subs in res_json['imported']]
 
     def subscribers(self, group_id, limit=100, offset=0, stype=None,
                     as_json=False):

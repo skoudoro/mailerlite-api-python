@@ -1,4 +1,7 @@
 """Module to tests groups."""
+import random
+import string
+import time
 
 import pytest
 
@@ -12,6 +15,14 @@ def header():
                'x-mailerlite-apikey': API_KEY_TEST
                }
     return headers
+
+
+def generate_random_email(length, seed=1234567):
+    random.seed(seed)
+    letters = string.ascii_lowercase
+    result_str = ''.join(random.choice(letters) for i in range(length))
+    mail = 'demo-test-{}-{}@mailerlite.com'.format(result_str, seed)
+    return mail
 
 
 def test_groups_instance(header):
@@ -61,8 +72,35 @@ def test_groups_crud(header):
         groups.get(e_res.id)
 
 
-def test_groups_subscriber():
-    # groups = Groups(header)
+def test_groups_subscriber(header):
+    groups = Groups(header)
 
-    # subs = groups.subscriber
-    pass
+    n_groups = groups.all()
+    assert len(n_groups) > 0
+    group_1 = n_groups[0]
+
+    subs_in_group_1 = groups.subscribers(group_1.id)
+    assert len(subs_in_group_1) > 0
+
+    sub1 = subs_in_group_1[0]
+    tmp_sub = groups.subscriber(group_1.id, sub1.id)
+
+    assert sub1.email == tmp_sub.email
+
+    while True:
+        try:
+            num = random.randint(1000, 100000)
+            mail = generate_random_email(length=15, seed=num)
+            data = {'name': 'John',
+                    'email': mail,
+                    'fields': {'company': 'MailerLite'}
+                    }
+            new_subs = groups.add_subscribers(group_1.id, data)
+        except OSError:
+            time.sleep(3)
+        else:
+            break
+
+    assert new_subs[0].email == mail
+
+    groups.delete_subscriber(group_1.id, new_subs[0].id)
