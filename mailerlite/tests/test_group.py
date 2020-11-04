@@ -101,6 +101,8 @@ def test_groups_subscriber(header):
         else:
             break
 
-    assert new_subs[0].email == mail
+    print(new_subs)
+    if new_subs:
+        assert new_subs[0].email == mail
 
-    groups.delete_subscriber(group_1.id, new_subs[0].id)
+        groups.delete_subscriber(group_1.id, new_subs[0].id)
