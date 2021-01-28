@@ -106,3 +106,32 @@ def test_groups_subscriber(header):
         assert new_subs[0].email == mail
 
         groups.delete_subscriber(group_1.id, new_subs[0].id)
+
+
+def test_groups_single_subscriber(header):
+    groups = Groups(header)
+
+    n_groups = groups.all()
+    assert len(n_groups) > 0
+    group_1 = n_groups[0]
+
+    while True:
+        try:
+            num = random.randint(1000, 100000)
+            mail = generate_random_email(length=15, seed=num)
+            data = {'name': 'John',
+                    'email': mail,
+                    'fields': {'company': 'MailerLite'}
+                    }
+            new_sub = groups.add_single_subscriber(group_1.id, data)
+        except OSError:
+            time.sleep(3)
+        else:
+            break
+
+    print(new_sub)
+    if new_sub:
+        assert new_sub.email == mail
+
+        groups.delete_subscriber(group_1.id, new_sub.id)
+

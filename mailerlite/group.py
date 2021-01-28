@@ -205,6 +205,46 @@ class Groups:
 
         return [Subscriber(**subs) for subs in res_json['imported']]
 
+    def add_single_subscriber(self, group_id, subscribers_data: dict, resubscribe=False,
+                              autoresponders=False, as_json=False):
+        """Add single new subscriber to specified group.
+
+        https://developers.mailerlite.com/v2/reference#add-single-subscriber
+
+        Parameters
+        ----------
+        group_id : int
+            group id
+        subscribers_data : dict,
+            subscribers data
+        resubscribe : bool
+            reactivate subscriber if value is true (default False)
+        autoresponders : bool
+            autoresponders will be sent if value is true (default False)
+        as_json : bool
+            return result as json format
+
+        Returns
+        -------
+        subscriber: :class:Subscriber
+            subscriber object
+
+        """
+        url = client.build_url('groups', group_id, 'subscribers')
+
+        body = {'resubscribe': resubscribe, 'autoresponders': autoresponders, **subscribers_data}
+
+        if not {'email', 'name'}.issubset(subscribers_data.keys()):
+            raise ValueError('Subscribers_data should contain the'
+                             ' following keys: email, name')
+
+        _, res_json = client.post(url, body=body, headers=self.headers)
+
+        if as_json or not res_json:
+            return res_json
+
+        return Subscriber(**res_json)
+
     def subscribers(self, group_id, limit=100, offset=0, stype=None,
                     as_json=False):
         """Get all subscribers in a specified group.
