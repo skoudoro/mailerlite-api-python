@@ -134,4 +134,3 @@ def test_groups_single_subscriber(header):
         assert new_sub.email == mail
 
         groups.delete_subscriber(group_1.id, new_sub.id)
-

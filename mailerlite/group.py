@@ -205,8 +205,9 @@ class Groups:
 
         return [Subscriber(**subs) for subs in res_json['imported']]
 
-    def add_single_subscriber(self, group_id, subscribers_data: dict, resubscribe=False,
-                              autoresponders=False, as_json=False):
+    def add_single_subscriber(self, group_id, subscribers_data: dict,
+                              resubscribe=False, autoresponders=False,
+                              as_json=False):
         """Add single new subscriber to specified group.
 
         https://developers.mailerlite.com/v2/reference#add-single-subscriber
@@ -232,7 +233,8 @@ class Groups:
         """
         url = client.build_url('groups', group_id, 'subscribers')
 
-        body = {'resubscribe': resubscribe, 'autoresponders': autoresponders, **subscribers_data}
+        body = {'resubscribe': resubscribe, 'autoresponders': autoresponders,
+                **subscribers_data}
 
         if not {'email', 'name'}.issubset(subscribers_data.keys()):
             raise ValueError('Subscribers_data should contain the'
