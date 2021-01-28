@@ -115,6 +115,14 @@ def test_groups_single_subscriber(header):
     assert len(n_groups) > 0
     group_1 = n_groups[0]
 
+    subs_in_group_1 = groups.subscribers(group_1.id)
+    assert len(subs_in_group_1) > 0
+
+    sub1 = subs_in_group_1[0]
+    tmp_sub = groups.subscriber(group_1.id, sub1.id)
+
+    assert sub1.email == tmp_sub.email
+
     while True:
         try:
             num = random.randint(1000, 100000)
