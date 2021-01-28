@@ -181,13 +181,14 @@ class Groups:
             group object
 
         """
-        url = client.build_url('groups', group_id, 'subscribers', 'import')
+        url_params = ['groups', group_id, 'subscribers']
 
         body = {'resubscribe': resubscribe, 'autoresponders': autoresponders}
         if isinstance(subscribers_data, dict):
             body['subscribers'] = [subscribers_data, ]
         elif isinstance(subscribers_data, list):
             body['subscribers'] = subscribers_data
+            url_params.append('import')
         else:
             raise ValueError('subscribers_data should be a dict or a list of'
                              ' dict that contains the following keys: email,'
@@ -198,6 +199,8 @@ class Groups:
         if errors:
             raise ValueError('All subscribers_data should contain the'
                              ' following keys: email, name')
+
+        url = client.build_url(url_params)
         _, res_json = client.post(url, body=body, headers=self.headers)
 
         if as_json or not res_json:
