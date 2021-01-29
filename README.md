@@ -217,6 +217,23 @@ Please, be aware that is not documented in the official API.
 >>> api.groups.subscriber(group_id=12345, subscriber_id=54321)
 ```
 
+#### Add list of subscribers to a Group
+
+This method calls the import endpoint https://developers.mailerlite.com/reference#add-many-subscribers
+```python
+>>> api.groups.add_subscribers(group_id=12345, subscribers_data=[{"email": "john@wick.com", "name": "John Wick"}], autoresponders=False, resubscribe=False, as_json=False)
+```
+```subscriber_data``` argument accepts a list of dictionaries or just one dictionary containing the subscriber name and email 
+
+#### Add a single subscriber to a Group
+
+This method calls the add single subscriber endpoint https://developers.mailerlite.com/reference#add-single-subscriber
+```python
+>>> api.groups.add_single_subscriber(group_id=12345, subscriber_data={"email": "john@wick.com", "name": "John Wick" ...}, autoresponders=False, resubscribe=False, as_json=False)
+```
+Unlike the method above, this add only one subscriber to a group. The ```subscriber_data``` argument accepts all subscriber attributes.
+Check available attributes on https://developers.mailerlite.com/reference#create-a-subscriber
+
 #### Delete one subscriber from a Group
 
 ```python
