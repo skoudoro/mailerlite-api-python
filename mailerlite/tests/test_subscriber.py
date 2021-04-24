@@ -135,4 +135,10 @@ def test_subscribers_crud(header):
     activity = subscriber.activity(email=mail)
     assert len(activity) in [0, 1]
 
+    with pytest.raises(IOError):
+        subscriber.activity()
+
+    with pytest.raises(ValueError):
+        subscriber.activity(email=mail, atype='test')
+
     assert subscriber.delete(e_res.id) is None

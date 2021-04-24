@@ -72,6 +72,20 @@ def test_campaign_error(header):
     with pytest.raises(ValueError):
         campaign.count(status='inbox')
 
+    with pytest.raises(IOError):
+        campaign.all(order='inbox')
+
+    with pytest.raises(ValueError):
+        campaign.create(data=[("subject", "Regular campaign subject"),
+                              ("type", "regular")])
+
+    with pytest.raises(ValueError):
+        campaign.create(data={"random_keys": "test"})
+
+    with pytest.raises(ValueError):
+        campaign.create(data={"random_keys": "test",
+                              "type": "regular"})
+
 
 def test_crud_campaign(header, campaign_data, campaign_data_ab):
     campaign_obj = Campaigns(header)

@@ -47,3 +47,7 @@ def test_account(header):
 
     optin = acc.double_optin()
     assert 'enabled' in optin.keys()
+
+    with pytest.raises(OSError):
+        # double_optin not available with this API keys
+        acc.set_double_optin(False)

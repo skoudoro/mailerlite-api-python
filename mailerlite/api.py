@@ -1,4 +1,5 @@
 """Mailerlite API."""
+import os
 
 from mailerlite.campaign import Campaigns
 from mailerlite.segment import Segments
@@ -15,7 +16,7 @@ class MailerLiteApi:
 
     """
 
-    def __init__(self, api_key):
+    def __init__(self, api_key=None):
         """Initialize a new mailerlite.api object.
 
         Parameters
@@ -24,6 +25,8 @@ class MailerLiteApi:
             Your mailerlite api_key.
 
         """
+        api_key = api_key or os.environ.get("MAILERLITE_PYTHON_API_KEY", None)
+
         if not api_key or not isinstance(api_key, str):
             raise ValueError("Empty API_KEY. Please enter a valid API_KEY")
 
