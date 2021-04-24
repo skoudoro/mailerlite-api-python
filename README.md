@@ -237,7 +237,7 @@ This method calls the import endpoint https://developers.mailerlite.com/referenc
 
 This method calls the add single subscriber endpoint https://developers.mailerlite.com/reference#add-single-subscriber
 ```python
->>> api.groups.add_single_subscriber(group_id=12345, subscriber_data={"email": "john@wick.com", "name": "John Wick" ...}, autoresponders=False, resubscribe=False, as_json=False)
+>>> api.groups.add_single_subscriber(group_id=12345, subscribers_data={"email": "john@wick.com", "name": "John Wick" ...}, autoresponders=False, resubscribe=False, as_json=False)
 ```
 Unlike the method above, this add only one subscriber to a group. The ```subscriber_data``` argument accepts all subscriber attributes.
 Check available attributes on https://developers.mailerlite.com/reference#create-a-subscriber
