@@ -107,6 +107,14 @@ def test_groups_subscriber(header):
 
         groups.delete_subscriber(group_1.id, new_subs[0].id)
 
+    with pytest.raises(ValueError):
+        data = {'name': 'John',
+                'fields': {'company': 'MailerLite'}}
+        groups.add_subscribers(group_1.id, data)
+
+    with pytest.raises(ValueError):
+        groups.add_subscribers(group_1.id, subscribers_data='hey!')
+
 
 def test_groups_single_subscriber(header):
     groups = Groups(header)
@@ -142,3 +150,8 @@ def test_groups_single_subscriber(header):
         assert new_sub.email == mail
 
         groups.delete_subscriber(group_1.id, new_sub.id)
+
+    with pytest.raises(ValueError):
+        data = {'name': 'John',
+                'fields': {'company': 'MailerLite'}}
+        groups.add_single_subscriber(group_1.id, data)
