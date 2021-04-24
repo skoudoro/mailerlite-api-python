@@ -60,6 +60,14 @@ First, Grab YOUR_API_KEY from your Mailerlite account (Profile > Integrations > 
 >>> api = MailerLiteApi('YOUR_API_KEY')
 ```
 
+A second option is to define an environment variable named `MAILERLITE_PYTHON_API_KEY`.
+Then, you do not need to precise it in your code:
+
+```python
+>>> from mailerlite import MailerLiteApi
+>>> api = MailerLiteApi()
+```
+
 ### Campaigns
 
 #### Get all campaigns or a specific one
