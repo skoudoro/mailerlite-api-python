@@ -9,7 +9,7 @@ Python Wrapper for Mailerlite API v2
     </tr>
     <tr>
       <td align="center"><b>Build Status</b></td>
-      <td align="center"><a href="https://travis-ci.com/github/skoudoro/mailerlite-api-python"><img src="https://travis-ci.com/skoudoro/mailerlite-api-python.svg?branch=master"></a> <a href="https://github.com/skoudoro/mailerlite-api-python/actions?query=workflow%3A%22CI+%28PIP%29%22"><img src="https://github.com/skoudoro/mailerlite-api-python/workflows/CI%20(PIP)/badge.svg"></a> <a href="https://github.com/skoudoro/mailerlite-api-python/actions?query=workflow%3A%22CI+%28CONDA%29%22"><img src="https://github.com/skoudoro/mailerlite-api-python/workflows/CI%20(CONDA)/badge.svg"></a></td>
+      <td align="center"><a href="https://github.com/skoudoro/mailerlite-api-python/actions?query=workflow%3A%22CI+%28PIP%29%22"><img src="https://github.com/skoudoro/mailerlite-api-python/workflows/CI%20(PIP)/badge.svg"></a> <a href="https://github.com/skoudoro/mailerlite-api-python/actions?query=workflow%3A%22CI+%28CONDA%29%22"><img src="https://github.com/skoudoro/mailerlite-api-python/workflows/CI%20(CONDA)/badge.svg"></a></td>
     </tr>
     <tr>
       <td align="center"><b>Metrics</b></td>
@@ -223,7 +223,7 @@ This method calls the import endpoint https://developers.mailerlite.com/referenc
 ```python
 >>> api.groups.add_subscribers(group_id=12345, subscribers_data=[{"email": "john@wick.com", "name": "John Wick"}], autoresponders=False, resubscribe=False, as_json=False)
 ```
-```subscriber_data``` argument accepts a list of dictionaries or just one dictionary containing the subscriber name and email 
+```subscriber_data``` argument accepts a list of dictionaries or just one dictionary containing the subscriber name and email
 
 #### Add a single subscriber to a Group
 
