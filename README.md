@@ -47,7 +47,7 @@ pip install -e .
 
 ## Method reference
 
-For complete reference, visit the [official MailerLite API reference](https://developers.mailerlite.com/reference).
+For the complete reference, visit the [official MailerLite API reference](https://developers.mailerlite.com/reference).
 
 ## Examples
 
@@ -168,7 +168,7 @@ Then, you do not need to precise it in your code:
 
 Get the total count of all subscribers in a single call.
 
-Please, be aware that is not documented in the official API.
+Please, be aware that this is not a documented feature in the official API.
 
 ```python
 >>> api.subscribers.count()
@@ -239,7 +239,7 @@ This method calls the add single subscriber endpoint https://developers.mailerli
 ```python
 >>> api.groups.add_single_subscriber(group_id=12345, subscribers_data={"email": "john@wick.com", "name": "John Wick" ...}, autoresponders=False, resubscribe=False, as_json=False)
 ```
-Unlike the method above, this add only one subscriber to a group. The ```subscriber_data``` argument accepts all subscriber attributes.
+Unlike the method above, this adds only one subscriber to a group. The ```subscriber_data``` argument accepts all subscriber attributes.
 Check available attributes on https://developers.mailerlite.com/reference#create-a-subscriber
 
 #### Delete one subscriber from a Group
