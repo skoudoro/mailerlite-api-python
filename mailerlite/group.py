@@ -193,8 +193,8 @@ class Groups:
                              ' dict that contains the following keys: email,'
                              ' name')
 
-        errors = [d for d in body['subscribers'] if 'email' not in d.keys()
-                  if 'name' not in d.keys()]
+        errors = [d for d in body['subscribers']
+                  if not {'email', 'name'}.issubset(d.keys())]
         if errors:
             raise ValueError('All subscribers_data should contain the'
                              ' following keys: email, name')
