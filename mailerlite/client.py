@@ -2,6 +2,7 @@
 
 import requests
 from urllib.parse import urlencode, urljoin
+
 from mailerlite.constants import MAILERLITE_API_V2_URL, VALID_REQUEST_METHODS
 
 
@@ -104,7 +105,7 @@ def make_request(url, method, headers=None, data=None,
         raise e
     else:
         if response.status_code >= 400:
-            print(response.json())
+            print(response.text)
             raise IOError(response)
 
         if response.status_code == 204:
