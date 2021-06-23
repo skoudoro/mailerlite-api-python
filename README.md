@@ -93,8 +93,9 @@ Then, you do not need to precise it in your code:
 
 ```python
 >>> data = {"subject": "Regular campaign subject",
-                       "groups": [2984475, 3237221],
-                       "type": "regular"}
+            "name": "Regular campaign name",
+            "groups": [2984475, 3237221],
+            "type": "regular"}
 >>> api.campaign.create(data)
 >>> api.campaign.delete(campaign_id=3971635)
 ```
