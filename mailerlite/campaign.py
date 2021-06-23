@@ -157,6 +157,7 @@ class Campaigns:
             campaign object. For a regular campaign, you  can use the
             following example:
             data = {"subject": "Regular campaign subject",
+                    "name": "Regular campaign name",
                     "groups": [2984475, 3237221],
                     "type": "regular"}
             For a/b  campaign type, you need more fields, Here an example:
@@ -181,7 +182,7 @@ class Campaigns:
         if not isinstance(data, dict):
             raise ValueError('In data should be a dictionary.')
         required_keys = ['type', ]
-        optional_keys = ['subject', 'from', 'from_name', 'language',
+        optional_keys = ['subject', 'name', 'from', 'from_name', 'language',
                          'ab_settings']
         ab_settings_keys = ['values', 'send_type', 'ab_win_type',
                             'winner_after', 'winner_after_type',

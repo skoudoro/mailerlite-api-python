@@ -40,7 +40,8 @@ Segment = namedtuple('Segment', ['id', 'title', 'filter', 'total', 'sent',
 Stats = namedtuple('Stats', ['count', 'rate'])
 Campaign = namedtuple('Campaign', ['id', 'total_recipients', 'type',
                                    'date_created', 'date_send', 'name',
-                                   'status', 'opened', 'clicked'])
+                                   'subject', 'status',
+                                   'opened', 'clicked'])
 Webhook = namedtuple('Webhook', ['id', 'event', 'url', 'created_at',
                                  'updated_at'])
 

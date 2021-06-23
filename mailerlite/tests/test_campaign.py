@@ -17,6 +17,7 @@ def header():
 @pytest.fixture
 def campaign_data():
     data = {"subject": "Regular campaign subject",
+            "name": "Regular campaign name",
             "groups": [2984475, 3237221],
             "type": "regular"
             }
