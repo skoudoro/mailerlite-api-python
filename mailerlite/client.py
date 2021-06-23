@@ -2,6 +2,7 @@
 
 import requests
 from urllib.parse import urlencode, urljoin
+
 from mailerlite.constants import MAILERLITE_API_V2_URL, VALID_REQUEST_METHODS
 
 
