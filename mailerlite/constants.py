@@ -14,7 +14,8 @@ Group = namedtuple('Group', ["id", "name", "total", "active", "unsubscribed",
                              "bounced", "unconfirmed", "junk", "sent",
                              "opened", "clicked", "date_created",
                              "date_updated", "parent_id"])
-Activity = namedtuple('Activity', ['date', 'report_id', 'subject', 'type',
+Activity = namedtuple('Activity', ['date', 'report_id', 'subject',
+                                   'campaign_name', 'type',
                                    'campaign_id', 'link_id', 'link',
                                    'receiver', 'receiver_name',
                                    'receiver_email', 'sender', 'sender_name',
@@ -39,7 +40,8 @@ Segment = namedtuple('Segment', ['id', 'title', 'filter', 'total', 'sent',
 Stats = namedtuple('Stats', ['count', 'rate'])
 Campaign = namedtuple('Campaign', ['id', 'total_recipients', 'type',
                                    'date_created', 'date_send', 'name',
-                                   'status', 'opened', 'clicked'])
+                                   'subject', 'status',
+                                   'opened', 'clicked'])
 Webhook = namedtuple('Webhook', ['id', 'event', 'url', 'created_at',
                                  'updated_at'])
 
