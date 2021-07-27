@@ -115,12 +115,13 @@ class Campaigns:
         -------
         success : bool
 
-        Examples:
-        ---------
+        Examples
+        --------
         >>> from mailerlite import MailerLiteApi
         >>> api = MailerLiteApi('my_keys')
-        >>> html = '<h1>Title</h1><p>Content</p><p><small>'
+        >>> html = '<head></head><body><h1>Title</h1><p>Content</p><p><small>'
         >>> html += '<a href=\"{$unsubscribe}\">Unsubscribe</a></small></p>'
+        >>> html += '</body>'
         >>> plain = "Your email client does not support HTML emails. "
         >>> plain += "Open newsletter here: {$url}. If you do not want"
         >>> plain += " to receive emails from us, click here: {$unsubscribe}"
@@ -129,12 +130,14 @@ class Campaigns:
 
         Notes
         -----
+        * HTML template must contain body and head tag.
         * HTML template must contain a link for unsubscribe. It may look like
             this: <a href="{$unsubscribe}">Unsubscribe</a>
         * Some email clients do not support HTML emails so you need to set
             plain text email and it must contain these variables:
             * {$unsubscribe} - unsubscribe link
             * {$url} - URL to your HTML newsletter
+
         """
         url = client.build_url('campaigns', campaign_id, 'content')
         # Todo, Check html syntax

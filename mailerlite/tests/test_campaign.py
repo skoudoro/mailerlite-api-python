@@ -98,8 +98,8 @@ def test_crud_campaign(header, campaign_data, campaign_data_ab):
     assert code == 200
     assert isinstance(res, dict)
 
-    html = '<h1>Title</h1><p>Content</p><p><small>'
-    html += '<a href=\"{$unsubscribe}\">Unsubscribe</a></small></p>'
+    html = '<head></head><body><h1>Title</h1><p>Content</p><p><small>'
+    html += '<a href=\"{$unsubscribe}\">Unsubscribe</a></small></p></body>'
     plain = "Your email client does not support HTML emails. "
     plain += "Open newsletter here: {$url}. If you do not want"
     plain += " to receive emails from us, click here: {$unsubscribe}"

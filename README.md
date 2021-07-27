@@ -81,7 +81,7 @@ Then, you do not need to precise it in your code:
 
 ```python
 >>> one_campaign = all_campaigns[0]
->>> html = '<h1>Title</h1><p>Content</p><p><small><a href=\"{$unsubscribe}\">Unsubscribe</a></small></p>'
+>>> html = '<head></head><body><h1>Title</h1><p>Content</p><p><small><a href=\"{$unsubscribe}\">Unsubscribe</a></small></p></body>'
 >>> plain = "Your email client does not support HTML emails. "
 >>> plain += "Open newsletter here: {$url}. If you do not want"
 >>> plain += " to receive emails from us, click here: {$unsubscribe}"
