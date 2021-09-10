@@ -219,34 +219,6 @@ class Campaigns:
         url = client.build_url('campaigns')
         return client.post(url, body=data, headers=self.headers)
 
-    def setContent(self, campaign_id, content):
-        """Updates the content of a campaign.
-
-        look at https://developers.mailerlite.com/reference#put-custom-content-to-campaign
-
-        Parameters
-        ----------
-        campaign_id : int
-            campaign id
-
-        content : dictionary
-            You can use the following example:
-            content = {"html": "<html template>",
-                       "plain": "<plain text of email"}
-            The plain parameter must contain these variables:
-                {$unsubscribe} - unsubscribe link
-                {$url} - URL to your HTML newsletter
-
-        Returns
-        -------
-        success: bool
-            update status
-            
-        """
-        url = client.build_url('campaigns', campaign_id, "content")
-        print ("url = " + url)
-        return client.put(url, headers=self.headers)
-
     def send(self, campaign_id):
         """Sends out a campaign.
 
