@@ -117,6 +117,7 @@ def test_crud_campaign(header, campaign_data, campaign_data_ab):
     assert nb_draft > 0
     assert len(res) > 0
 
+
 def test_create_and_send_campaign(header, campaign_data, campaign_data_ab):
     campaign_obj = Campaigns(header)
 

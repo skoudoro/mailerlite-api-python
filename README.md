@@ -100,6 +100,27 @@ Then, you do not need to precise it in your code:
 >>> api.campaign.delete(campaign_id=3971635)
 ```
 
+#### Send a campaign
+
+```python
+>>> data = {"subject": "Regular campaign subject",
+            "name": "Regular campaign name",
+            "groups": [2984475, 3237221],
+            "type": "regular"}
+>>> 
+>>> _, res = api.campaign.create(data)
+>>> campaign_id = res['id']
+>>> 
+>>> html = '<head></head><body><h1>Your Title</h1><p>Your Content</p><p><small>'
+>>> html += '<a href=\"{$unsubscribe}\">Unsubscribe</a></small></p></body>'
+>>> plain = "Your email client does not support HTML emails. "
+>>> plain += "Open newsletter here: {$url}. If you do not want"
+>>> plain += " to receive emails from us, click here: {$unsubscribe}"
+>>> 
+>>> updated = campaign_obj.update(campaign_id, html=html, plain=plain)
+>>> api.campaign.delete(campaign_id=campaign_id)
+```
+
 #### count campaign
 
 ```python

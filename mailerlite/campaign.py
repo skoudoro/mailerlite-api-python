@@ -222,7 +222,7 @@ class Campaigns:
     def send(self, campaign_id):
         """Sends out a campaign.
 
-        look at https://developers.mailerlite.com/reference#campaign-actions-and-triggers
+        https://developers.mailerlite.com/reference#campaign-actions-and-triggers
 
         Parameters
         ----------
@@ -234,8 +234,7 @@ class Campaigns:
         content : dict
             The JSON output from the API
         """
-        url = client.build_url('campaigns', campaign_id, "actions/send")
-        print ("url = " + url)
+        url = client.build_url('campaigns', campaign_id, "actions/send")    
         return client.post(url, headers=self.headers)
 
     def delete(self, campaign_id):
