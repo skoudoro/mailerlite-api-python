@@ -117,8 +117,8 @@ Then, you do not need to precise it in your code:
 >>> plain += "Open newsletter here: {$url}. If you do not want"
 >>> plain += " to receive emails from us, click here: {$unsubscribe}"
 >>> 
->>> updated = campaign_obj.update(campaign_id, html=html, plain=plain)
->>> api.campaign.delete(campaign_id=campaign_id)
+>>> api.campaign.update(campaign_id, html=html, plain=plain)
+>>> api.campaign.send(campaign_id)
 ```
 
 #### count campaign
