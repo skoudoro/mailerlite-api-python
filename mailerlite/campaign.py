@@ -219,6 +219,24 @@ class Campaigns:
         url = client.build_url('campaigns')
         return client.post(url, body=data, headers=self.headers)
 
+    def send(self, campaign_id):
+        """Sends out a campaign.
+
+        https://developers.mailerlite.com/reference#campaign-actions-and-triggers
+
+        Parameters
+        ----------
+        campaign_id : int
+            campaign id
+
+        Returns
+        -------
+        content : dict
+            The JSON output from the API
+        """
+        url = client.build_url('campaigns', campaign_id, "actions/send")    
+        return client.post(url, headers=self.headers)
+
     def delete(self, campaign_id):
         """Remove a campaign.
 
