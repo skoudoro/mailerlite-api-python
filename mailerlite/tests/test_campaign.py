@@ -9,6 +9,7 @@ from mailerlite.constants import API_KEY_TEST
 @pytest.fixture
 def header():
     headers = {'content-type': "application/json",
+               "X-MailerLite-ApiDocs": "true",
                'x-mailerlite-apikey': API_KEY_TEST
                }
     return headers
@@ -42,9 +43,11 @@ def campaign_data_ab():
 
 def test_wrong_headers(campaign_data):
     headers_1 = {'content-type': "app",
+                 "X-MailerLite-ApiDocs": "true",
                  'x-mailerlite-apikey': API_KEY_TEST
                  }
     headers_2 = {'content-type': "application/json",
+                 "X-MailerLite-ApiDocs": "true",
                  'x-mailerlite-apikey': 'FAKE_KEY'
                  }
     headers_3 = {'content-type': "application/json",
@@ -145,5 +148,5 @@ def test_cancel_send_campaign(header):
         assert res[0].status == 'outbox'
         code, res_2 = campaign_obj.cancel(res[0].id)
         assert code == 200
-        assert res_2.status == 'draft'
-        assert res[0].id == res_2.id
+        assert res_2["status"] == 'draft'
+        assert res[0].id == res_2["id"]

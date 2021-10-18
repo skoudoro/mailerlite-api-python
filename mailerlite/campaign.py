@@ -240,7 +240,7 @@ class Campaigns:
         url = client.build_url('campaigns', campaign_id, "actions/send")
         return client.post(url, headers=self.headers)
 
-    def cancel(self, campaign_id):
+    def cancel(self, campaign_id, as_json=False):
         """Cancel a campaign which is in outbox.
 
         https://developers.mailerlite.com/reference#campaign-actions-and-triggers
@@ -249,6 +249,8 @@ class Campaigns:
         ----------
         campaign_id : int
             campaign id
+        as_json : bool
+            return result as json format
 
         Returns
         -------
@@ -258,7 +260,17 @@ class Campaigns:
         """
         # TODO: Check if campaign is in Outbox otherwise raise an issue
         url = client.build_url('campaigns', campaign_id, "actions/cancel")
-        return client.post(url, headers=self.headers)
+        code, res_json = client.post(url, headers=self.headers)
+
+        # TODO: Check new attribute to campaign object.
+        # if as_json or not res_json or code != 200:
+        #     return res_json
+
+        # res_json['opened'] = Stats(**res_json.pop('opened'))
+        # res_json['clicked'] = Stats(**res_json.pop('clicked'))
+
+        # return Campaign(**res_json)
+        return code, res_json
 
     def delete(self, campaign_id):
         """Remove a campaign.
