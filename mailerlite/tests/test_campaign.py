@@ -145,5 +145,5 @@ def test_cancel_send_campaign(header):
         assert res[0].status == 'outbox'
         code, res_2 = campaign_obj.cancel(res[0].id)
         assert code == 200
-        assert res[0].status == 'draft'
+        assert res_2.status == 'draft'
         assert res[0].id == res_2.id

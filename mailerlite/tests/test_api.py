@@ -9,6 +9,7 @@ from mailerlite.constants import API_KEY_TEST
 @pytest.fixture
 def header():
     headers = {'content-type': "application/json",
+               "X-MailerLite-ApiDocs": "true",
                'x-mailerlite-apikey': API_KEY_TEST
                }
     return headers
@@ -16,6 +17,7 @@ def header():
 
 def test_wrong_headers():
     headers_2 = {'content-type': "application/json",
+                 "X-MailerLite-ApiDocs": "true",
                  'x-mailerlite-apikey': 'FAKE_KEY'
                  }
 
