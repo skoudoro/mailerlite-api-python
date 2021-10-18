@@ -118,7 +118,7 @@ def test_crud_campaign(header, campaign_data, campaign_data_ab):
     assert len(res) > 0
 
 
-def test_create_and_send_campaign(header, campaign_data, campaign_data_ab):
+def test_create_and_send_campaign(header, campaign_data):
     campaign_obj = Campaigns(header)
 
     code, res = campaign_obj.create(campaign_data)
@@ -134,3 +134,16 @@ def test_create_and_send_campaign(header, campaign_data, campaign_data_ab):
 
     code, res = campaign_obj.send(res['id'])
     assert code == 200
+
+
+def test_cancel_send_campaign(header):
+    campaign_obj = Campaigns(header)
+
+    if campaign_obj.count('outbox'):
+        print("pass herer")
+        res = campaign_obj.all(status='outbox', limit=5)
+        assert res[0].status == 'outbox'
+        code, res_2 = campaign_obj.cancel(res[0].id)
+        assert code == 200
+        assert res[0].status == 'draft'
+        assert res[0].id == res_2.id
