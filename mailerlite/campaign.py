@@ -220,7 +220,7 @@ class Campaigns:
         return client.post(url, body=data, headers=self.headers)
 
     def send(self, campaign_id):
-        """Sends out a campaign.
+        """Send out a campaign.
 
         https://developers.mailerlite.com/reference#campaign-actions-and-triggers
 
@@ -233,8 +233,31 @@ class Campaigns:
         -------
         content : dict
             The JSON output from the API
+
         """
-        url = client.build_url('campaigns', campaign_id, "actions/send")    
+        # TODO: Check if campaign is in Draft otherwise raise an issue
+        #  Add parameters like followup / send later / etc...
+        url = client.build_url('campaigns', campaign_id, "actions/send")
+        return client.post(url, headers=self.headers)
+
+    def cancel(self, campaign_id):
+        """Cancel a campaign which is in outbox.
+
+        https://developers.mailerlite.com/reference#campaign-actions-and-triggers
+
+        Parameters
+        ----------
+        campaign_id : int
+            campaign id
+
+        Returns
+        -------
+        content : dict
+            The JSON output from the API
+
+        """
+        # TODO: Check if campaign is in Outbox otherwise raise an issue
+        url = client.build_url('campaigns', campaign_id, "actions/cancel")
         return client.post(url, headers=self.headers)
 
     def delete(self, campaign_id):
