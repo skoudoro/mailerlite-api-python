@@ -28,7 +28,8 @@ Subscriber = namedtuple('Subscriber', ['id', 'name', 'email', 'sent',
                                        'fields', 'date_subscribe',
                                        'date_unsubscribe', 'date_created',
                                        'date_updated', 'opened_rate',
-                                       'clicked_rate', 'country_id'
+                                       'clicked_rate', 'country_id',
+                                       'user_agent'
                                        ])
 Pagination = namedtuple('Pagination', ["total", "count", "per_page",
                                        "current_page", "total_pages",
