@@ -115,12 +115,13 @@ class Campaigns:
         -------
         success : bool
 
-        Examples:
-        ---------
+        Examples
+        --------
         >>> from mailerlite import MailerLiteApi
         >>> api = MailerLiteApi('my_keys')
-        >>> html = '<h1>Title</h1><p>Content</p><p><small>'
+        >>> html = '<head></head><body><h1>Title</h1><p>Content</p><p><small>'
         >>> html += '<a href=\"{$unsubscribe}\">Unsubscribe</a></small></p>'
+        >>> html += '</body>'
         >>> plain = "Your email client does not support HTML emails. "
         >>> plain += "Open newsletter here: {$url}. If you do not want"
         >>> plain += " to receive emails from us, click here: {$unsubscribe}"
@@ -129,12 +130,14 @@ class Campaigns:
 
         Notes
         -----
+        * HTML template must contain body and head tag.
         * HTML template must contain a link for unsubscribe. It may look like
             this: <a href="{$unsubscribe}">Unsubscribe</a>
         * Some email clients do not support HTML emails so you need to set
             plain text email and it must contain these variables:
             * {$unsubscribe} - unsubscribe link
             * {$url} - URL to your HTML newsletter
+
         """
         url = client.build_url('campaigns', campaign_id, 'content')
         # Todo, Check html syntax
@@ -215,6 +218,59 @@ class Campaigns:
 
         url = client.build_url('campaigns')
         return client.post(url, body=data, headers=self.headers)
+
+    def send(self, campaign_id):
+        """Send out a campaign.
+
+        https://developers.mailerlite.com/reference#campaign-actions-and-triggers
+
+        Parameters
+        ----------
+        campaign_id : int
+            campaign id
+
+        Returns
+        -------
+        content : dict
+            The JSON output from the API
+
+        """
+        # TODO: Check if campaign is in Draft otherwise raise an issue
+        #  Add parameters like followup / send later / etc...
+        url = client.build_url('campaigns', campaign_id, "actions/send")
+        return client.post(url, headers=self.headers)
+
+    def cancel(self, campaign_id, as_json=False):
+        """Cancel a campaign which is in outbox.
+
+        https://developers.mailerlite.com/reference#campaign-actions-and-triggers
+
+        Parameters
+        ----------
+        campaign_id : int
+            campaign id
+        as_json : bool
+            return result as json format
+
+        Returns
+        -------
+        content : dict
+            The JSON output from the API
+
+        """
+        # TODO: Check if campaign is in Outbox otherwise raise an issue
+        url = client.build_url('campaigns', campaign_id, "actions/cancel")
+        code, res_json = client.post(url, headers=self.headers)
+
+        # TODO: Check new attribute to campaign object.
+        # if as_json or not res_json or code != 200:
+        #     return res_json
+
+        # res_json['opened'] = Stats(**res_json.pop('opened'))
+        # res_json['clicked'] = Stats(**res_json.pop('clicked'))
+
+        # return Campaign(**res_json)
+        return code, res_json
 
     def delete(self, campaign_id):
         """Remove a campaign.

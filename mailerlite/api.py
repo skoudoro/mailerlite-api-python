@@ -31,6 +31,7 @@ class MailerLiteApi:
             raise ValueError("Empty API_KEY. Please enter a valid API_KEY")
 
         self._headers = {'content-type': "application/json",
+                         "X-MailerLite-ApiDocs": "true",
                          'x-mailerlite-apikey': api_key
                          }
 

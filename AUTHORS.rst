@@ -10,4 +10,6 @@ Maintainer
 Contributors
 ------------
 
-None yet. Why not be the first? See: CONTRIBUTING.rst
+* Zain Rizvi <zainrizvi>
+
+Join the list! See: CONTRIBUTING.rst

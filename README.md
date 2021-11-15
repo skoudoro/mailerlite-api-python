@@ -81,7 +81,7 @@ Then, you do not need to precise it in your code:
 
 ```python
 >>> one_campaign = all_campaigns[0]
->>> html = '<h1>Title</h1><p>Content</p><p><small><a href=\"{$unsubscribe}\">Unsubscribe</a></small></p>'
+>>> html = '<head></head><body><h1>Title</h1><p>Content</p><p><small><a href=\"{$unsubscribe}\">Unsubscribe</a></small></p></body>'
 >>> plain = "Your email client does not support HTML emails. "
 >>> plain += "Open newsletter here: {$url}. If you do not want"
 >>> plain += " to receive emails from us, click here: {$unsubscribe}"
@@ -99,6 +99,37 @@ Then, you do not need to precise it in your code:
 >>> api.campaign.create(data)
 >>> api.campaign.delete(campaign_id=3971635)
 ```
+
+#### Send a campaign
+
+```python
+>>> data = {"subject": "Regular campaign subject",
+            "name": "Regular campaign name",
+            "groups": [2984475, 3237221],
+            "type": "regular"}
+>>>
+>>> _, res = api.campaign.create(data)
+>>> campaign_id = res['id']
+>>>
+>>> html = '<head></head><body><h1>Your Title</h1><p>Your Content</p><p><small>'
+>>> html += '<a href=\"{$unsubscribe}\">Unsubscribe</a></small></p></body>'
+>>> plain = "Your email client does not support HTML emails. "
+>>> plain += "Open newsletter here: {$url}. If you do not want"
+>>> plain += " to receive emails from us, click here: {$unsubscribe}"
+>>>
+>>> api.campaign.update(campaign_id, html=html, plain=plain)
+>>> api.campaign.send(campaign_id)
+```
+
+#### Cancel a scheduled campaign
+
+```python
+>>> outbox_campaigns = campaign_obj.all(status='outbox', limit=5)
+>>> selected_campaign = outbox_campaigns[0]
+>>>
+>>> api.campaign.cancel(selected_campaign.id)
+```
+
 
 #### count campaign
 

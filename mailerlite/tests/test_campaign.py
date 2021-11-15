@@ -9,6 +9,7 @@ from mailerlite.constants import API_KEY_TEST
 @pytest.fixture
 def header():
     headers = {'content-type': "application/json",
+               "X-MailerLite-ApiDocs": "true",
                'x-mailerlite-apikey': API_KEY_TEST
                }
     return headers
@@ -42,9 +43,11 @@ def campaign_data_ab():
 
 def test_wrong_headers(campaign_data):
     headers_1 = {'content-type': "app",
+                 "X-MailerLite-ApiDocs": "true",
                  'x-mailerlite-apikey': API_KEY_TEST
                  }
     headers_2 = {'content-type': "application/json",
+                 "X-MailerLite-ApiDocs": "true",
                  'x-mailerlite-apikey': 'FAKE_KEY'
                  }
     headers_3 = {'content-type': "application/json",
@@ -98,8 +101,8 @@ def test_crud_campaign(header, campaign_data, campaign_data_ab):
     assert code == 200
     assert isinstance(res, dict)
 
-    html = '<h1>Title</h1><p>Content</p><p><small>'
-    html += '<a href=\"{$unsubscribe}\">Unsubscribe</a></small></p>'
+    html = '<head></head><body><h1>Title</h1><p>Content</p><p><small>'
+    html += '<a href=\"{$unsubscribe}\">Unsubscribe</a></small></p></body>'
     plain = "Your email client does not support HTML emails. "
     plain += "Open newsletter here: {$url}. If you do not want"
     plain += " to receive emails from us, click here: {$unsubscribe}"
@@ -116,3 +119,34 @@ def test_crud_campaign(header, campaign_data, campaign_data_ab):
     nb_draft = campaign_obj.count('draft')
     assert nb_draft > 0
     assert len(res) > 0
+
+
+def test_create_and_send_campaign(header, campaign_data):
+    campaign_obj = Campaigns(header)
+
+    code, res = campaign_obj.create(campaign_data)
+    assert code == 200
+
+    html = '<head></head><body><h1>Title</h1><p>Content</p><p><small>'
+    html += '<a href=\"{$unsubscribe}\">Unsubscribe</a></small></p></body>'
+    plain = "Your email client does not support HTML emails. "
+    plain += "Open newsletter here: {$url}. If you do not want"
+    plain += " to receive emails from us, click here: {$unsubscribe}"
+
+    updated = campaign_obj.update(res['id'], html=html, plain=plain)
+
+    code, res = campaign_obj.send(res['id'])
+    assert code == 200
+
+
+def test_cancel_send_campaign(header):
+    campaign_obj = Campaigns(header)
+
+    if campaign_obj.count('outbox'):
+        print("pass herer")
+        res = campaign_obj.all(status='outbox', limit=5)
+        assert res[0].status == 'outbox'
+        code, res_2 = campaign_obj.cancel(res[0].id)
+        assert code == 200
+        assert res_2["status"] == 'draft'
+        assert res[0].id == res_2["id"]
