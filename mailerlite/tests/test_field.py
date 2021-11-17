@@ -11,13 +11,14 @@ from mailerlite.field import Fields
 @pytest.fixture
 def header():
     headers = {'content-type': "application/json",
+               'X-MailerLite-ApiDocs': "true",
                'x-mailerlite-apikey': API_KEY_TEST
                }
     return headers
 
 
 def generate_random_string(length, seed=1234567):
-    random.seed(seed)
+    # random.seed(seed)
     letters = string.ascii_uppercase
     result_str = ''.join(random.choice(letters) for i in range(length))
     return result_str
@@ -64,7 +65,6 @@ def test_fields_error(header):
 def test_fields_crud(header):
     fields = Fields(header)
     all_fields = fields.all()
-
     assert len(all_fields) > 0
 
     last_field = all_fields[-2]
