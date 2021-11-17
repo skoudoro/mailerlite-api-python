@@ -12,13 +12,14 @@ from mailerlite.subscriber import Subscribers
 @pytest.fixture
 def header():
     headers = {'content-type': "application/json",
+               'X-MailerLite-ApiDocs': "true",
                'x-mailerlite-apikey': API_KEY_TEST
                }
     return headers
 
 
 def generate_random_email(length, seed=1234567):
-    random.seed(seed)
+    # random.seed(seed)
     letters = string.ascii_lowercase
     result_str = ''.join(random.choice(letters) for i in range(length))
     mail = 'demo-test-{}-{}@mailerlite.com'.format(result_str, seed)

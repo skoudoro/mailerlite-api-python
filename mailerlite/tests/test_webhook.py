@@ -9,6 +9,7 @@ from mailerlite.webhook import Webhooks
 @pytest.fixture
 def header():
     headers = {'content-type': "application/json",
+               'X-MailerLite-ApiDocs': "true",
                'x-mailerlite-apikey': API_KEY_TEST
                }
     return headers

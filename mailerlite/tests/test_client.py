@@ -35,6 +35,7 @@ def test_check_headers():
 
     headers = {
         'content-type': "application/json",
+        'X-MailerLite-ApiDocs': "true",
         'x-mailerlite-apikey': API_KEY_TEST
     }
 
