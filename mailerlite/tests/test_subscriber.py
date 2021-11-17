@@ -128,7 +128,9 @@ def test_subscribers_crud(header):
     res = subscriber.all(as_json=True)
     assert len(res) > 0
 
-    assert subscriber.count() == subscriber.count(as_json=True).get('count')
+    with pytest.warns(UserWarning):
+        assert subscriber.count() == subscriber.count(
+            as_json=True).get('count')
 
     groups = subscriber.groups(email=mail)
     assert len(groups) in [0, 1]

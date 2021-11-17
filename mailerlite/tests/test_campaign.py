@@ -143,7 +143,6 @@ def test_cancel_send_campaign(header):
     campaign_obj = Campaigns(header)
 
     if campaign_obj.count('outbox'):
-        print("pass herer")
         res = campaign_obj.all(status='outbox', limit=5)
         assert res[0].status == 'outbox'
         code, res_2 = campaign_obj.cancel(res[0].id)
