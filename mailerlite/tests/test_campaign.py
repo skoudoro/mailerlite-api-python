@@ -1,4 +1,5 @@
 """Module to tests Campaign."""
+import random
 
 import pytest
 
@@ -143,11 +144,16 @@ def test_cancel_send_campaign(header):
     campaign_obj = Campaigns(header)
 
     if campaign_obj.count('outbox'):
-        res = campaign_obj.all(status='outbox', limit=5)
+        res = campaign_obj.all(status='outbox', limit=10)
         if not res:
             pytest.skip("No campaign found with outbox status")
-        assert res[0].status == 'outbox'
-        code, res_2 = campaign_obj.cancel(res[0].id)
+
+        campaign_idx = random.randint(0, len(res))
+        assert res[campaign_idx].status == 'outbox'
+        try:
+            code, res_2 = campaign_obj.cancel(res[campaign_idx].id)
+        except OSError:
+            pytest.skip("Campaign Not Found so can not be cancel")
         assert code == 200
         assert res_2["status"] == 'draft'
         assert res[0].id == res_2["id"]
