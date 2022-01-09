@@ -144,6 +144,8 @@ def test_cancel_send_campaign(header):
 
     if campaign_obj.count('outbox'):
         res = campaign_obj.all(status='outbox', limit=5)
+        if not res:
+            pytest.skip("No campaign found with outbox status")
         assert res[0].status == 'outbox'
         code, res_2 = campaign_obj.cancel(res[0].id)
         assert code == 200

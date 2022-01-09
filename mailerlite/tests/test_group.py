@@ -77,13 +77,26 @@ def test_groups_subscriber(header):
     groups = Groups(header)
 
     n_groups = groups.all()
-    assert len(n_groups) > 0
-    group_1 = n_groups[0]
+
+    if not len(n_groups):
+        pytest.skip("No groups found")
+
+    group_ix = random.randint(0, len(n_groups))
+    try:
+        group_1 = n_groups[group_ix]
+    except IndexError:
+        pytest.skip("Group index not found. Maybe deleted by another thread")
 
     subs_in_group_1 = groups.subscribers(group_1.id)
-    assert len(subs_in_group_1) > 0
 
-    sub1 = subs_in_group_1[0]
+    if not len(subs_in_group_1):
+        pytest.skip("No subscriber found in this group.")
+
+    try:
+        sub1 = subs_in_group_1[0]
+    except IndexError:
+        pytest.skip("Subscriber not found. Maybe deleted by another thread")
+
     tmp_sub = groups.subscriber(group_1.id, sub1.id)
 
     assert sub1.email == tmp_sub.email
@@ -102,7 +115,6 @@ def test_groups_subscriber(header):
         else:
             break
 
-    print(new_subs)
     if new_subs:
         assert new_subs[0].email == mail
 
@@ -121,13 +133,23 @@ def test_groups_single_subscriber(header):
     groups = Groups(header)
 
     n_groups = groups.all()
-    assert len(n_groups) > 0
-    group_1 = n_groups[0]
+    if not len(n_groups):
+        pytest.skip("No groups found")
+
+    try:
+        group_1 = n_groups[0]
+    except IndexError:
+        pytest.skip("Group index not found. Maybe deleted by another thread")
 
     subs_in_group_1 = groups.subscribers(group_1.id)
-    assert len(subs_in_group_1) > 0
+    if not len(subs_in_group_1):
+        pytest.skip("No subscriber found in this group.")
 
-    sub1 = subs_in_group_1[0]
+    try:
+        sub1 = subs_in_group_1[0]
+    except IndexError:
+        pytest.skip("Subscriber not found. Maybe deleted by another thread")
+
     tmp_sub = groups.subscriber(group_1.id, sub1.id)
 
     assert sub1.email == tmp_sub.email
@@ -146,7 +168,6 @@ def test_groups_single_subscriber(header):
         else:
             break
 
-    print(new_sub)
     if new_sub:
         assert new_sub.email == mail
 
