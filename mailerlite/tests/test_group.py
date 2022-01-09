@@ -78,7 +78,9 @@ def test_groups_subscriber(header):
 
     n_groups = groups.all()
     assert len(n_groups) > 0
-    group_1 = n_groups[0]
+
+    group_ix = random.randint(0, n_groups)
+    group_1 = n_groups[group_ix]
 
     subs_in_group_1 = groups.subscribers(group_1.id)
     assert len(subs_in_group_1) > 0
@@ -102,7 +104,7 @@ def test_groups_subscriber(header):
         else:
             break
 
-    print(new_subs)
+    # print(new_subs)
     if new_subs:
         assert new_subs[0].email == mail
 
@@ -146,7 +148,7 @@ def test_groups_single_subscriber(header):
         else:
             break
 
-    print(new_sub)
+    # print(new_sub)
     if new_sub:
         assert new_sub.email == mail
 
