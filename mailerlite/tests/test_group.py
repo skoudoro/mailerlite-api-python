@@ -79,7 +79,7 @@ def test_groups_subscriber(header):
     n_groups = groups.all()
     assert len(n_groups) > 0
 
-    group_ix = random.randint(0, n_groups)
+    group_ix = random.randint(0, len(n_groups))
     group_1 = n_groups[group_ix]
 
     subs_in_group_1 = groups.subscribers(group_1.id)
