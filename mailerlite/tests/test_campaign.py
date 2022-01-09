@@ -148,10 +148,9 @@ def test_cancel_send_campaign(header):
         if not res:
             pytest.skip("No campaign found with outbox status")
 
-        campaign_idx = random.randint(0, len(res))
-        assert res[campaign_idx].status == 'outbox'
+        assert res[0].status == 'outbox'
         try:
-            code, res_2 = campaign_obj.cancel(res[campaign_idx].id)
+            code, res_2 = campaign_obj.cancel(res[0].id)
         except OSError:
             pytest.skip("Campaign Not Found so can not be cancel")
         assert code == 200
