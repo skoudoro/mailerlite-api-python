@@ -7,6 +7,7 @@ import pytest
 
 from mailerlite.constants import API_KEY_TEST
 from mailerlite.subscriber import Subscribers
+from mailerlite.testing import succeed_or_skip_sensitive_tests
 
 
 @pytest.fixture
@@ -68,6 +69,7 @@ def test_subscribers_error(header):
         subs.get(mail='demo-test-12345555@mailerlite.com')
 
 
+@succeed_or_skip_sensitive_tests
 def test_subscribers_crud(header):
     subscriber = Subscribers(header)
 

@@ -9,7 +9,7 @@ Python Wrapper for Mailerlite API v2
     </tr>
     <tr>
       <td align="center"><b>Build Status</b></td>
-      <td align="center"><a href="https://github.com/skoudoro/mailerlite-api-python/actions?query=workflow%3A%22CI+%28PIP%29%22"><img src="https://github.com/skoudoro/mailerlite-api-python/workflows/CI%20(PIP)/badge.svg"></a> <a href="https://github.com/skoudoro/mailerlite-api-python/actions?query=workflow%3A%22CI+%28CONDA%29%22"><img src="https://github.com/skoudoro/mailerlite-api-python/workflows/CI%20(CONDA)/badge.svg"></a></td>
+      <td align="center"><a href="https://github.com/skoudoro/mailerlite-api-python/actions?query=workflow%3A%22CI_PIP%22"><img src="https://github.com/skoudoro/mailerlite-api-python/workflows/CI_PIP/badge.svg"></a> <a href="https://github.com/skoudoro/mailerlite-api-python/actions?query=workflow%3A%22CI_CONDA%22"><img src="https://github.com/skoudoro/mailerlite-api-python/workflows/CI_CONDA/badge.svg"></a></td>
     </tr>
     <tr>
       <td align="center"><b>Metrics</b></td>
