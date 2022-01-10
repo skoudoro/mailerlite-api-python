@@ -7,6 +7,7 @@ import pytest
 
 from mailerlite.constants import API_KEY_TEST, Group
 from mailerlite.group import Groups
+from mailerlite.testing import succeed_or_skip_sensitive_tests
 
 
 @pytest.fixture
@@ -73,6 +74,7 @@ def test_groups_crud(header):
         groups.get(e_res.id)
 
 
+@succeed_or_skip_sensitive_tests
 def test_groups_subscriber(header):
     groups = Groups(header)
 
@@ -129,6 +131,7 @@ def test_groups_subscriber(header):
         groups.add_subscribers(group_1.id, subscribers_data='hey!')
 
 
+@succeed_or_skip_sensitive_tests
 def test_groups_single_subscriber(header):
     groups = Groups(header)
 

@@ -1,10 +1,9 @@
 """Module to tests Campaign."""
-import random
-
 import pytest
 
 from mailerlite.campaign import Campaigns
 from mailerlite.constants import API_KEY_TEST
+from mailerlite.testing import succeed_or_skip_sensitive_tests
 
 
 @pytest.fixture
@@ -122,6 +121,7 @@ def test_crud_campaign(header, campaign_data, campaign_data_ab):
     assert len(res) > 0
 
 
+@succeed_or_skip_sensitive_tests
 def test_create_and_send_campaign(header, campaign_data):
     campaign_obj = Campaigns(header)
 
@@ -140,6 +140,7 @@ def test_create_and_send_campaign(header, campaign_data):
     assert code == 200
 
 
+@succeed_or_skip_sensitive_tests
 def test_cancel_send_campaign(header):
     campaign_obj = Campaigns(header)
 
