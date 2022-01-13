@@ -175,6 +175,7 @@ Then, you do not need to precise it in your code:
 
 ```python
 >>> api.subscribers.activity(id='1343965485')
+>>> api.subscribers.activity(id='1343965485', limit=50, offset=1, atype='clicks')
 ```
 
 #### Create subscriber

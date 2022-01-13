@@ -137,7 +137,7 @@ def test_subscribers_crud(header):
     groups = subscriber.groups(email=mail)
     assert len(groups) in [0, 1]
 
-    activity = subscriber.activity(email=mail)
+    activity = subscriber.activity(email=mail, limit=50, offset=1)
     assert len(activity) in [0, 1]
 
     with pytest.raises(IOError):
