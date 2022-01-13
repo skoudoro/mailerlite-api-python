@@ -356,7 +356,8 @@ class Subscribers:
         all_groups = [Group(**res) for res in res_json]
         return all_groups
 
-    def activity(self, as_json=False, atype=None, **identifier):
+    def activity(self, as_json=False, atype=None, limit=100,
+                 offset=0, **identifier):
         """Get activities (clicks, opens, etc) of selected subscriber.
 
         More informations:
@@ -379,6 +380,10 @@ class Subscribers:
             * unsubscribes
             * forwards
             * sendings
+        limit : int, optional
+            How many subscribers you want, default 100
+        offset : int, optional
+            page index, default 0
 
         Returns
         -------
@@ -386,6 +391,7 @@ class Subscribers:
             all subscriber activities. More informations :
             https://developers.mailerlite.com/v2/reference#activity-of-single-subscriber
         """
+        params = {'limit': limit, 'offset': offset}
         path = get_id_or_email_identifier(**identifier)
         if path is None:
             raise IOError('An identifier must be define')
@@ -399,7 +405,7 @@ class Subscribers:
                                  ' be {0}'.format(possible_atype))
             args.append(atype)
 
-        url = client.build_url(*args)
+        url = client.build_url(*args, **params)
 
         _, res_json = client.get(url, headers=self.headers)
 
