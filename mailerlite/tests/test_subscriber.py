@@ -2,6 +2,7 @@
 import random
 import string
 import time
+import itertools
 
 import pytest
 
@@ -73,7 +74,8 @@ def test_subscribers_error(header):
 def test_subscribers_crud(header):
     subscriber = Subscribers(header)
 
-    while True:
+    attempt = itertools.count()
+    while True and next(attempt) < 20:
         try:
             num = random.randint(1000, 100000)
             mail = generate_random_email(length=15, seed=num)

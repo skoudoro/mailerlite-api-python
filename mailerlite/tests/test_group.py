@@ -2,6 +2,7 @@
 import random
 import string
 import time
+import itertools
 
 import pytest
 
@@ -103,7 +104,8 @@ def test_groups_subscriber(header):
 
     assert sub1.email == tmp_sub.email
 
-    while True:
+    attempt = itertools.count()
+    while True and next(attempt) < 15:
         try:
             num = random.randint(1000, 100000)
             mail = generate_random_email(length=15, seed=num)
@@ -157,7 +159,8 @@ def test_groups_single_subscriber(header):
 
     assert sub1.email == tmp_sub.email
 
-    while True:
+    attempt = itertools.count()
+    while True and next(attempt) < 20:
         try:
             num = random.randint(1000, 100000)
             mail = generate_random_email(length=15, seed=num)
