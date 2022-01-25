@@ -32,7 +32,11 @@ def test_groups_instance(header):
     with pytest.raises(ValueError):
         Groups(API_KEY_TEST)
 
-    groups = Groups(header)
+    try:
+        groups = Groups(header)
+    except ValueError:
+        return
+
     res_json = groups.all(as_json=True)
 
     # TEST to check if there is new key in the API
@@ -55,7 +59,10 @@ def test_groups_instance(header):
 
 
 def test_groups_crud(header):
-    groups = Groups(header)
+    try:
+        groups = Groups(header)
+    except ValueError:
+        return
 
     expected_group_name = "TEST_K_GROUP"
     expected_group_name_2 = "TEST_GROUP_KKK"

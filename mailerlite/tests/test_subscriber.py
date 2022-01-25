@@ -28,7 +28,13 @@ def generate_random_email(length, seed=1234567):
     return mail
 
 
-def test_wrong_headers():
+def test_wrong_headers(header):
+    # test valid first
+    try:
+        _ = Subscribers(header)
+    except ValueError:
+        return
+
     headers_2 = {'content-type': "application/json",
                  'x-mailerlite-apikey': 'FAKE_KEY'
                  }
@@ -49,7 +55,10 @@ def test_wrong_headers():
 
 
 def test_subscribers_error(header):
-    subs = Subscribers(header)
+    try:
+        subs = Subscribers(header)
+    except ValueError:
+        return
 
     # Unknown keys
     with pytest.raises(ValueError):
