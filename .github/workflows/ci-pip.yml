@@ -45,7 +45,7 @@ jobs:
         pip install -e .
         coverage run -m pytest -svv  mailerlite  # Run the tests and check for test coverage.
         coverage report -m  # Generate test coverage report.
-        codecov  # Upload the report to codecov
+        # codecov  # Upload the report to codecov
     - name: Test with pytest
       if: ${{ matrix.python-version != '3.8' && matrix.os != 'ubuntu-latest' }}
       run: |
