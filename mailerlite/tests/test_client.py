@@ -42,5 +42,5 @@ def test_check_headers():
         res, msg = client.check_headers(headers)
         assert res
         assert not msg
-    except:
+    except Exception:
         return
