@@ -43,10 +43,11 @@ def check_headers(headers):
 
     try:
         url = build_url('stats')
-        _, res_json = get(url, headers=headers)
+        _, _ = get(url, headers=headers)
     except OSError as e_res:
         valid_headers = False
-        error_msg = e_res.args[0].content or "Something Wrong happens with the API headers"
+        error_msg = e_res.args[0].content or \
+            "Something Wrong happens with the API headers"
 
     return valid_headers, error_msg
 
