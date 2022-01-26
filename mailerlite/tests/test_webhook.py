@@ -15,7 +15,12 @@ def header():
     return headers
 
 
-def test_wrong_headers():
+def test_wrong_headers(header):
+    try:
+        _ = Webhooks(header)
+    except ValueError:
+        return
+
     headers_2 = {'content-type': "application/json",
                  'x-mailerlite-apikey': 'FAKE_KEY'
                  }
@@ -36,14 +41,21 @@ def test_wrong_headers():
 
 
 def test_webhook_error(header):
-    wh = Webhooks(header)
+    try:
+        wh = Webhooks(header)
+    except ValueError:
+        return
 
     with pytest.raises(OSError):
         wh.update(123456, "new_url", "new_event")
 
 
 def test_webhook_crud(header):
-    wh = Webhooks(header)
+    try:
+        wh = Webhooks(header)
+    except ValueError:
+        return
+
     all_wh = wh.all()
 
     assert len(all_wh) > 0

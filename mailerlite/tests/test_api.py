@@ -15,7 +15,13 @@ def header():
     return headers
 
 
-def test_wrong_headers():
+def test_wrong_headers(header):
+    # test valid first
+    try:
+        _ = MailerLiteApi(header)
+    except ValueError:
+        return
+
     headers_2 = {'content-type': "application/json",
                  "X-MailerLite-ApiDocs": "true",
                  'x-mailerlite-apikey': 'FAKE_KEY'
@@ -30,7 +36,10 @@ def test_wrong_headers():
 
 
 def test_api(header):
-    api = MailerLiteApi(API_KEY_TEST)
+    try:
+        api = MailerLiteApi(API_KEY_TEST)
+    except ValueError:
+        return
 
     assert api.headers == header
 

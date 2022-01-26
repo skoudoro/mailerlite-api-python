@@ -41,6 +41,14 @@ def check_headers(headers):
         valid_headers = False
         return valid_headers, error_msg
 
+    try:
+        url = build_url('stats')
+        _, _ = get(url, headers=headers)
+    except OSError as e_res:
+        valid_headers = False
+        error_msg = e_res.args[0].content or \
+            "Something Wrong happens with the API headers"
+
     return valid_headers, error_msg
 
 

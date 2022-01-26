@@ -14,7 +14,13 @@ def header():
     return headers
 
 
-def test_wrong_headers():
+def test_wrong_headers(header):
+    # test valid first
+    try:
+        _ = Account(header)
+    except ValueError:
+        return
+
     headers_2 = {'content-type': "application/json",
                  'x-mailerlite-apikey': 'FAKE_KEY'
                  }
@@ -35,7 +41,10 @@ def test_wrong_headers():
 
 
 def test_account(header):
-    acc = Account(header)
+    try:
+        acc = Account(header)
+    except ValueError:
+        return
 
     info = acc.info()
     assert 'account' in info.keys()
