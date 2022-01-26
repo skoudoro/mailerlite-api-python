@@ -41,7 +41,13 @@ def campaign_data_ab():
     return data_ab
 
 
-def test_wrong_headers(campaign_data):
+def test_wrong_headers(header, campaign_data):
+    # test valid first
+    try:
+        _ = Campaigns(header)
+    except ValueError:
+        return
+
     headers_1 = {'content-type': "app",
                  "X-MailerLite-ApiDocs": "true",
                  'x-mailerlite-apikey': API_KEY_TEST
@@ -71,7 +77,10 @@ def test_wrong_headers(campaign_data):
 
 
 def test_campaign_error(header):
-    campaign = Campaigns(header)
+    try:
+        campaign = Campaigns(header)
+    except ValueError:
+        return
 
     with pytest.raises(ValueError):
         campaign.count(status='inbox')
@@ -92,7 +101,10 @@ def test_campaign_error(header):
 
 
 def test_crud_campaign(header, campaign_data, campaign_data_ab):
-    campaign_obj = Campaigns(header)
+    try:
+        campaign_obj = Campaigns(header)
+    except ValueError:
+        return
 
     code, res = campaign_obj.create(campaign_data)
     assert code == 200

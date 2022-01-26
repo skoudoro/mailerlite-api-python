@@ -14,7 +14,13 @@ def header():
     return headers
 
 
-def test_wrong_headers():
+def test_wrong_headers(header):
+    # test valid first
+    try:
+        _ = Segments(header)
+    except ValueError:
+        return
+
     headers_2 = {'content-type': "application/json",
                  'x-mailerlite-apikey': 'FAKE_KEY'
                  }
@@ -35,14 +41,21 @@ def test_wrong_headers():
 
 
 def test_segments_error(header):
-    segm = Segments(header)
+    try:
+        segm = Segments(header)
+    except ValueError:
+        return
 
     with pytest.raises(OSError):
         segm.all(order='upper')
 
 
 def test_segments_crud(header):
-    segm = Segments(header)
+    try:
+        segm = Segments(header)
+    except ValueError:
+        return
+
     all_segm, meta = segm.all()
 
     assert len(all_segm) == meta.pagination.count
