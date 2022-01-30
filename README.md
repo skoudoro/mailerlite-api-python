@@ -15,7 +15,8 @@ Python Wrapper for Mailerlite API v2
       <td align="center"><b>Metrics</b></td>
       <td align="center">
         <a href="https://app.codacy.com/manual/skab12/mailerlite-api-python?utm_source=github.com&utm_medium=referral&utm_content=skoudoro/mailerlite-api-python&utm_campaign=Badge_Grade_Dashboard
-"><img src="https://api.codacy.com/project/badge/Grade/9c17e95d29cd489ba86411db969a576e" alt="codacy mailerlite python"></a> <a href="https://codecov.io/gh/skoudoro/mailerlite-api-python"><img src="https://codecov.io/gh/skoudoro/mailerlite-api-python/branch/master/graph/badge.svg" alt="codecov mailerlite python"></a>
+"><img src="https://api.codacy.com/project/badge/Grade/9c17e95d29cd489ba86411db969a576e" alt="codacy mailerlite python"></a>
+<!-- <a href="https://codecov.io/gh/skoudoro/mailerlite-api-python"><img src="https://codecov.io/gh/skoudoro/mailerlite-api-python/branch/master/graph/badge.svg" alt="codecov mailerlite python"></a>  -->
       </td>
     </tr>
     <tr>
