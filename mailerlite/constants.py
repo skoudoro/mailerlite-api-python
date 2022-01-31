@@ -51,3 +51,11 @@ Webhook = namedtuple('Webhook', ['id', 'event', 'url', 'created_at',
 for nt in [Subscriber, Field, Group, Activity, Segment, Meta, Pagination,
            Campaign, Stats, Webhook]:
     nt.__new__.__defaults__ = (None,) * len(nt._fields)
+
+
+def validate_or_make_namedtuples(obj, keys):
+
+    if not set(keys).issubset(obj._fields):
+        diff = set(list(obj._fields)).symmetric_difference(set(keys))
+        return namedtuple(f'{obj.__name__}2', obj._fields + tuple(diff))
+    return obj
