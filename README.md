@@ -97,8 +97,8 @@ Then, you do not need to precise it in your code:
             "name": "Regular campaign name",
             "groups": [2984475, 3237221],
             "type": "regular"}
->>> api.campaign.create(data)
->>> api.campaign.delete(campaign_id=3971635)
+>>> api.campaigns.create(data)
+>>> api.campaigns.delete(campaign_id=3971635)
 ```
 
 #### Send a campaign
@@ -109,7 +109,7 @@ Then, you do not need to precise it in your code:
             "groups": [2984475, 3237221],
             "type": "regular"}
 >>>
->>> _, res = api.campaign.create(data)
+>>> _, res = api.campaigns.create(data)
 >>> campaign_id = res['id']
 >>>
 >>> html = '<head></head><body><h1>Your Title</h1><p>Your Content</p><p><small>'
@@ -118,8 +118,8 @@ Then, you do not need to precise it in your code:
 >>> plain += "Open newsletter here: {$url}. If you do not want"
 >>> plain += " to receive emails from us, click here: {$unsubscribe}"
 >>>
->>> api.campaign.update(campaign_id, html=html, plain=plain)
->>> api.campaign.send(campaign_id)
+>>> api.campaigns.update(campaign_id, html=html, plain=plain)
+>>> api.campaigns.send(campaign_id)
 ```
 
 #### Cancel a scheduled campaign
@@ -128,15 +128,15 @@ Then, you do not need to precise it in your code:
 >>> outbox_campaigns = campaign_obj.all(status='outbox', limit=5)
 >>> selected_campaign = outbox_campaigns[0]
 >>>
->>> api.campaign.cancel(selected_campaign.id)
+>>> api.campaigns.cancel(selected_campaign.id)
 ```
 
 
 #### count campaign
 
 ```python
->>> api.campaign.count()
->>> api.campaign.count(status='draft')
+>>> api.campaigns.count()
+>>> api.campaigns.count(status='draft')
 ```
 
 ### Subscribers
