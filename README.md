@@ -1,6 +1,6 @@
 # Mailerlite-api-python
 
-Python Wrapper for Mailerlite API v2
+Python Wrapper for Mailerlite API
 
 <table align="center">
     <tr>
@@ -48,7 +48,13 @@ pip install -e .
 
 ## Method reference
 
-For the complete reference, visit the [official MailerLite API reference](https://developers.mailerlite.com/reference).
+For the complete reference, visit the [official MailerLite API reference](https://developers-classic.mailerlite.com/reference).
+
+## Notes
+
+This version is handling the V2_BETA API.
+
+we are currently updating the project to handle the new V2 released last summer 2022.
 
 ## Examples
 
