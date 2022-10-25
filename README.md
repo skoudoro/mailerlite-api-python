@@ -52,7 +52,7 @@ For the complete reference, visit the [official MailerLite API reference](https:
 
 ## Notes
 
-This version is handling the V2_BETA API.
+This version is handling the V2_BETA API (classic version).
 
 we are currently updating the project to handle the new V2 released last summer 2022.
 
