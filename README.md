@@ -1,3 +1,6 @@
+# ⚠️⚠️⚠️⚠️⚠️ WARNING ⚠️⚠️⚠️⚠️⚠️ : This REPO is no longer maintained in favor of the official mailerlite python client [look here](https://github.com/mailerlite/mailerlite-python)
+
+
 # Mailerlite-api-python
 
 Python Wrapper for Mailerlite API
